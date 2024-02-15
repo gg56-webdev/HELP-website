@@ -1,30 +1,72 @@
 ---
 import Dropdown from "@/components/Dropdown.astro";
-import { SITE_LINKS, type Link } from "@/constants.ts";
+import { SITE_LINKS } from "@/constants.ts";
+import type { Link } from "@/types";
 import type { ComponentProps } from "astro/types";
+import { getAbsoluteLocaleUrl, getRelativeLocaleUrl } from "astro:i18n";
+import { useTranslation, type AvailableLocales } from "i18n";
+
+const {
+  HOME,
+  BRIEF,
+  DISCUSSIONS,
+  MEETINGS,
+  DOCUMENTS,
+  NEWS,
+  ABOUT,
+  BACKGROUND,
+  NETWORK,
+  CONTACT,
+  FLAGSHIP,
+} = SITE_LINKS;
+
+const lang = Astro.currentLocale as AvailableLocales;
+
+const t = useTranslation(lang);
 
 const links: Array<Link | ComponentProps<typeof Dropdown>> = [
-  SITE_LINKS.HOME,
+  { title: t("link.home"), href: getRelativeLocaleUrl(lang, HOME) },
   {
-    title: "What we do",
+    title: t("dropdown.what-we-do"),
     links: [
-      SITE_LINKS.BRIEF,
-      SITE_LINKS.DISCUSSIONS,
-      SITE_LINKS.MEETINGS,
-      SITE_LINKS.DOCUMENTS,
+      { title: t("link.in-brief"), href: getRelativeLocaleUrl(lang, BRIEF) },
+      {
+        title: t("link.panel-discussions"),
+        href: getRelativeLocaleUrl(lang, DISCUSSIONS),
+      },
+      {
+        title: t("link.past-meetings"),
+        href: getRelativeLocaleUrl(lang, MEETINGS),
+      },
+      {
+        title: t("link.documentation"),
+        href: getRelativeLocaleUrl(lang, DOCUMENTS),
+      },
     ],
   },
-  SITE_LINKS.NEWS,
+  { title: t("link.newsroom"), href: getRelativeLocaleUrl(lang, NEWS) },
   {
-    title: "About HELP",
+    title: t("dropdown.about"),
     links: [
-      SITE_LINKS.ABOUT,
-      SITE_LINKS.BACKGROUND,
-      SITE_LINKS.NETWORK,
-      SITE_LINKS.CONTACT,
+      { title: t("link.who-we-are"), href: getRelativeLocaleUrl(lang, ABOUT) },
+      {
+        title: t("link.background"),
+        href: getRelativeLocaleUrl(lang, BACKGROUND),
+      },
+      {
+        title: t("link.network"),
+        href: getRelativeLocaleUrl(lang, NETWORK),
+      },
+      {
+        title: t("link.contact"),
+        href: getRelativeLocaleUrl(lang, CONTACT),
+      },
     ],
   },
-  SITE_LINKS.FLAGSHIP,
+  {
+    title: t("link.flagship-initiatives"),
+    href: getAbsoluteLocaleUrl(lang, FLAGSHIP),
+  },
 ];
 ---
 
