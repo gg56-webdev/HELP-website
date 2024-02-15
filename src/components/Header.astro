@@ -1,7 +1,6 @@
 ---
 import { languages } from "i18n";
-import Dropdown from "@/components/Dropdown.astro";
-import { SITE_LINKS } from "@/constants.ts";
+import MainNav from "@/components/MainNav.astro";
 ---
 
 <header class="fixed z-50 w-full text-white">
@@ -12,24 +11,7 @@ import { SITE_LINKS } from "@/constants.ts";
     <hr />
     <div class="flex items-center gap-4">
       <strong class="text-lg">HELP</strong>
-      <nav class="mx-auto flex">
-        <ul class="flex gap-8 uppercase hover:*:underline">
-          {
-            SITE_LINKS.map((i) => {
-              const isDropdown = "links" in i;
-              return (
-                <li>
-                  {isDropdown ? (
-                    <Dropdown links={i.links} name={i.name} />
-                  ) : (
-                    <a href={i.href}>{i.title}</a>
-                  )}
-                </li>
-              );
-            })
-          }
-        </ul>
-      </nav>
+      <MainNav />
       <select name="lang" id="lang" class="appearance-none">
         {
           languages.map(({ name, lang }) => (

@@ -1,0 +1,48 @@
+---
+import Dropdown from "@/components/Dropdown.astro";
+import { SITE_LINKS, type Link } from "@/constants.ts";
+import type { ComponentProps } from "astro/types";
+
+const links: Array<Link | ComponentProps<typeof Dropdown>> = [
+  SITE_LINKS.HOME,
+  {
+    title: "What we do",
+    links: [
+      SITE_LINKS.BRIEF,
+      SITE_LINKS.DISCUSSIONS,
+      SITE_LINKS.MEETINGS,
+      SITE_LINKS.DOCUMENTS,
+    ],
+  },
+  SITE_LINKS.NEWS,
+  {
+    title: "About HELP",
+    links: [
+      SITE_LINKS.ABOUT,
+      SITE_LINKS.BACKGROUND,
+      SITE_LINKS.NETWORK,
+      SITE_LINKS.CONTACT,
+    ],
+  },
+  SITE_LINKS.FLAGSHIP,
+];
+---
+
+<nav class="mx-auto flex">
+  <ul class="flex gap-8 uppercase hover:*:underline">
+    {
+      links.map((i) => {
+        const isDropdown = "links" in i;
+        return (
+          <li>
+            {isDropdown ? (
+              <Dropdown links={i.links} title={i.title} />
+            ) : (
+              <a href={i.href}>{i.title}</a>
+            )}
+          </li>
+        );
+      })
+    }
+  </ul>
+</nav>

@@ -1,26 +1,16 @@
-export type Link = { title: string; href: string };
-export type Dropdown = { name: string; links: Link[] };
+export type Base = { title: string };
+export type Link = Base & { href: string };
 
-export const SITE_LINKS: Array<Link | Dropdown> = [
-  { title: "home", href: "/" },
-  {
-    name: "what-we-do",
-    links: [
-      { title: "in-brief", href: "/brief" },
-      { title: "panel-discussions", href: "/discussions" },
-      { title: "past-meetings", href: "/meetings" },
-      { title: "documentation", href: "/documents" },
-    ],
-  },
-  { title: "newsroom", href: "/news" },
-  {
-    name: "about-HELP",
-    links: [
-      { title: "who-we-are", href: "/about" },
-      { title: "background", href: "/background" },
-      { title: "network", href: "/network" },
-      { title: "contact", href: "/contact" },
-    ],
-  },
-  { title: "flagship-initiatives", href: "/flagship-initiatives" },
-] as const;
+export const SITE_LINKS = {
+  HOME: { title: "home", href: "/" },
+  BRIEF: { title: "in-brief", href: "/brief" },
+  DISCUSSIONS: { title: "panel-discussions", href: "/discussions" },
+  MEETINGS: { title: "past-meetings", href: "/meetings" },
+  DOCUMENTS: { title: "documentation", href: "/documents" },
+  NEWS: { title: "newsroom", href: "/news" },
+  ABOUT: { title: "who-we-are", href: "/about" },
+  BACKGROUND: { title: "background", href: "/background" },
+  NETWORK: { title: "network", href: "/network" },
+  CONTACT: { title: "contact", href: "/contact" },
+  FLAGSHIP: { title: "flagship-initiatives", href: "/flagship-initiatives" },
+} as const;

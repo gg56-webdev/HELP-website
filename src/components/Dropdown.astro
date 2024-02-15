@@ -1,14 +1,13 @@
 ---
-import type { Dropdown } from "@/constants";
+import type { Base, Link } from "@/constants";
+type Props = Base & { links: Link[] };
 
-type Props = Dropdown;
-
-const { name, links } = Astro.props;
+const { title, links } = Astro.props;
 ---
 
 <div class="relative">
   <button type="button" class="peer flex items-center uppercase"
-    >{name}
+    >{title}
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="24"
