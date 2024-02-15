@@ -1,0 +1,38 @@
+---
+import type { Dropdown } from "@/constants";
+
+type Props = Dropdown;
+
+const { name, links } = Astro.props;
+---
+
+<div class="relative">
+  <button type="button" class="peer flex items-center uppercase"
+    >{name}
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="ml-1 inline-block"><path d="m6 9 6 6 6-6"></path></svg
+    ></button
+  >
+  <div
+    class="invisible absolute left-0 top-[calc(100%+.25rem)] w-max rounded-lg bg-white p-4 capitalize text-black opacity-0 transition-all focus-within:visible focus-within:opacity-100 peer-focus:visible peer-focus:opacity-100"
+  >
+    <ul class="hover:*:underline">
+      {
+        links.map(({ title, href }) => (
+          <li>
+            <a {href}>{title}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</div>

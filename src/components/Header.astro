@@ -1,0 +1,56 @@
+---
+import { languages } from "i18n";
+import Dropdown from "@/components/Dropdown.astro";
+import { SITE_LINKS } from "@/constants.ts";
+---
+
+<header class="fixed z-50 w-full text-white">
+  <div class="mx-auto max-w-screen-lg space-y-2 px-2 py-2">
+    <strong id="org" class="text-sm"
+      >High-level Experts and Leaders Panel on Water and Disasters</strong
+    >
+    <hr />
+    <div class="flex items-center gap-4">
+      <strong class="text-lg">HELP</strong>
+      <nav class="mx-auto flex">
+        <ul class="flex gap-8 uppercase hover:*:underline">
+          {
+            SITE_LINKS.map((i) => {
+              const isDropdown = "links" in i;
+              return (
+                <li>
+                  {isDropdown ? (
+                    <Dropdown links={i.links} name={i.name} />
+                  ) : (
+                    <a href={i.href}>{i.title}</a>
+                  )}
+                </li>
+              );
+            })
+          }
+        </ul>
+      </nav>
+      <select name="lang" id="lang" class="appearance-none">
+        {
+          languages.map(({ name, lang }) => (
+            <option value={lang}>{name}</option>
+          ))
+        }
+      </select>
+    </div>
+  </div>
+</header>
+
+<style>
+  header {
+    animation: change-bg linear both;
+    animation-timeline: scroll();
+    animation-range: 0 150px;
+  }
+
+  @keyframes change-bg {
+    to {
+      @apply bg-blue-600 shadow;
+    }
+  }
+</style>

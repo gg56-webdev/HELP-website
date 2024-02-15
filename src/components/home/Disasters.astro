@@ -1,0 +1,31 @@
+---
+const list = [
+  ["Flood"],
+  ["Tsunami"],
+  ["Pollution"],
+  ["Drought"],
+  ["Contamination"],
+];
+---
+
+<section id="disasters">
+  <div class="mx-auto max-w-[50ch] space-y-4 text-center">
+    <h2>Understand Water Disasters</h2>
+    <p class="">
+      Understanding and discussing water disasters are essential steps in
+      addressing the challenges they pose to our society and the world's
+      inhabitants.
+    </p>
+  </div>
+  <ul
+    class="relative flex gap-0.5 text-center text-white *:h-48 *:flex-1 *:bg-blue-600 *:transition-all before:absolute before:left-1/2 before:-translate-x-1/2 before:border-[30px] before:border-b-0 before:border-white before:border-x-transparent before:transition hover:before:opacity-0 motion-safe:hover:*:grow-[1.5]"
+  >
+    {
+      list.map(([text]) => (
+        <li class="grid place-items-center">
+          <div>{text}</div>
+        </li>
+      ))
+    }
+  </ul>
+</section>

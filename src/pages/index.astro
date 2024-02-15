@@ -1,0 +1,69 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Disasters from "@/components/home/Disasters.astro";
+import News from "@/components/News.astro";
+---
+
+<BaseLayout title="">
+  <main>
+    <section id="hero" class="min-h-dvh bg-slate-500">
+      <div class="relative mx-auto min-h-dvh max-w-screen-lg">
+        <div
+          class="absolute bottom-0 right-0 max-w-[50ch] space-y-4 bg-blue-600/75 p-8 text-white"
+        >
+          <h1 class="text-4xl font-bold">Water is life.</h1>
+          <p class="text-lg">
+            Yet in the face of escalating threats like pollution and scarcity,
+            collaboration is vital for a sustainable future.
+          </p>
+          <button>Our mission</button>
+        </div>
+      </div>
+    </section>
+    <section id="about" class="mx-auto max-w-screen-lg px-2">
+      <div class="grid md:grid-cols-2">
+        <div></div>
+        <div>
+          <h2>
+            The High-level Experts and Leaders Panel on Water and Disasters
+          </h2>
+          <p>
+            The High-level Experts and Leaders Panel on Water and Disasters
+            (HELP) was established to assist the international community,
+            governments and stakeholders in mobilizing political will and
+            resources. It will promote actions to raise awareness, ensure
+            coordination and collaboration, establish common goals and targets,
+            monitor progress, and take effective measures aimed at addressing
+            the issues of water and disasters.
+          </p>
+          <ul>
+            <li>Coordination and Collaboration</li>
+            <li>Awareness and Advocacy</li>
+            <li>Monitoring and Action</li>
+          </ul>
+          <button>Who We Are</button>
+        </div>
+      </div>
+      <div class="grid md:grid-cols-2">
+        <div>
+          <h2>
+            Water-related disasters affect 90% of all disaster victims
+            worldwide.
+          </h2>
+          <p>
+            Water is essential for life, yet it can also pose significant
+            threats to our society. Over the past decade, we’ve witnessed an
+            increase in the frequency and severity of water-related disasters.
+            These events, including floods, droughts, storm surges, and
+            tsunamis, not only disrupt sustainable development but also trigger
+            political, social, and economic turmoil in various nations.
+          </p>
+          <button>More About Water Disasters</button>
+        </div>
+        <div></div>
+      </div>
+    </section>
+    <Disasters />
+    <News />
+  </main>
+</BaseLayout>

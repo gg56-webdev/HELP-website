@@ -1,0 +1,28 @@
+---
+const news = [
+  [
+    "2023 HELP Global Report on Water and Disasters launched in Manila at HELP22",
+  ],
+  [
+    "Sixth UN Special Thematic Session on Water and Disasters will be held on March 21st in NY",
+  ],
+  [
+    "HELP Guiding Principles for Environmental Justice in Flood Risk Management launched in Tokyo [FEB 2023]",
+  ],
+];
+---
+
+<section id="news" class="mx-auto max-w-screen-lg px-2">
+  <h2>A Relevant Actor in Times of Crisis</h2>
+  <ul
+    class="flex gap-2 font-bold text-white *:flex-1 *:rounded-lg *:p-4 first:*:grow-[1.5] first:*:text-2xl"
+  >
+    {
+      news.map(([title]) => (
+        <li class="h-52 bg-slate-700">
+          <article>{title}</article>
+        </li>
+      ))
+    }
+  </ul>
+</section>
