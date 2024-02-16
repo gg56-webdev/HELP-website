@@ -1,0 +1,31 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { defaultLocale, languages } from "i18n";
+
+const {
+  currentLocale,
+  url: { pathname },
+} = Astro;
+// WARNING: need to be careful if locale code is longer then 2
+const path = currentLocale === defaultLocale ? pathname : pathname.slice(4);
+---
+
+<label for="language" class="sr-only">Select language</label>
+<select
+  name="language"
+  id="language"
+  class="text-black"
+  onchange="location = this.value"
+>
+  {
+    languages.map(({ name, lang }) => (
+      <option
+        value={getRelativeLocaleUrl(lang, path)}
+        selected={lang === currentLocale}
+        {lang}
+      >
+        {} {name}
+      </option>
+    ))
+  }
+</select>

@@ -1,6 +1,6 @@
 ---
 import MainNav from "@/components/MainNav.astro";
-import { languages } from "i18n";
+import LanguageSelect from "@/components/LanguageSelect.astro";
 ---
 
 <header class="fixed z-50 w-full text-white">
@@ -12,13 +12,7 @@ import { languages } from "i18n";
     <div class="flex items-center gap-4">
       <strong class="text-lg">HELP</strong>
       <MainNav />
-      <select name="lang" id="lang" class="appearance-none">
-        {
-          languages.map(({ name, lang }) => (
-            <option value={lang}>{name}</option>
-          ))
-        }
-      </select>
+      <LanguageSelect />
     </div>
   </div>
 </header>

@@ -8,5 +8,8 @@ export default defineConfig({
   i18n: {
     defaultLocale,
     locales: languages.map(({ lang }) => lang),
+    fallback: {
+      fr: "en",
+    },
   },
 });
