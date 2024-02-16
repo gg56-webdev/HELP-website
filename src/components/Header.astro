@@ -3,13 +3,15 @@ import MainNav from "@/components/MainNav.astro";
 import LanguageSelect from "@/components/LanguageSelect.astro";
 ---
 
-<header class="fixed z-50 w-full text-white">
+<header
+  class="fixed z-50 w-full bg-blue-600 text-white supports-[animation-timeline:scroll()]:bg-transparent"
+>
   <div class="mx-auto max-w-screen-lg space-y-2 px-2 py-2">
     <strong id="org" class="text-sm" lang="en"
       >High-level Experts and Leaders Panel on Water and Disasters</strong
     >
     <hr />
-    <div class="flex items-center gap-4">
+    <div class="flex items-center justify-between gap-4">
       <strong class="text-lg">HELP</strong>
       <MainNav />
       <LanguageSelect />
@@ -18,15 +20,18 @@ import LanguageSelect from "@/components/LanguageSelect.astro";
 </header>
 
 <style>
-  header {
-    animation: change-bg linear both;
-    animation-timeline: scroll();
-    animation-range: 0 150px;
-  }
+  @supports (animation-timeline: scroll()) {
+    header {
+      @apply bg-transparent;
+      animation: change-bg linear both;
+      animation-timeline: scroll();
+      animation-range: 0 150px;
+    }
 
-  @keyframes change-bg {
-    to {
-      @apply bg-blue-600 shadow;
+    @keyframes change-bg {
+      to {
+        @apply bg-blue-600 shadow;
+      }
     }
   }
 </style>

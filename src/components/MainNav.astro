@@ -70,8 +70,8 @@ const links: Array<Link | ComponentProps<typeof Dropdown>> = [
 ];
 ---
 
-<nav class="mx-auto flex">
-  <ul class="flex gap-8 uppercase hover:*:underline">
+<nav class="flex">
+  <ul class="flex gap-8 uppercase tracking-wide hover:*:underline">
     {
       links.map((i) => {
         const isDropdown = "links" in i;
