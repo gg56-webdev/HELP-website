@@ -4,7 +4,7 @@ type Props = { showArrow?: boolean };
 const { showArrow = true } = Astro.props;
 ---
 
-<div class="relative">
+<drop-down class="relative">
   <button type="button" class="group peer flex items-center uppercase">
     <slot name="button" />
     {
@@ -27,8 +27,44 @@ const { showArrow = true } = Astro.props;
     }</button
   >
   <div
-    class="invisible absolute left-0 top-[calc(100%+.25rem)] w-max opacity-0 transition-all focus-within:visible focus-within:opacity-100 peer-focus:visible peer-focus:opacity-100"
+    data-dropdown-panel
+    class="invisible absolute top-[calc(100%+.25rem)] w-max opacity-0 transition-all focus-within:visible focus-within:opacity-100 peer-focus:visible peer-focus:opacity-100"
   >
     <slot />
   </div>
-</div>
+</drop-down>
+
+<script>
+  const debounce = (cb: () => void, time = 100) => {
+    let timer: number;
+    return () => {
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(cb, time);
+    };
+  };
+
+  class Dropdown extends HTMLElement {
+    constructor() {
+      super();
+      const $panel = this.querySelector(
+        "[data-dropdown-panel]",
+      ) as HTMLDivElement;
+
+      const adjustDropdown = () => {
+        const { right, width } = $panel.getBoundingClientRect();
+        const { innerWidth } = window;
+        if (innerWidth < right) {
+          $panel.style.left = "auto";
+          $panel.style.right = "0";
+        } else if (right + width < innerWidth) {
+          $panel.style.right = "auto";
+          $panel.style.left = "0";
+        }
+      };
+
+      window.addEventListener("resize", debounce(adjustDropdown));
+      window.addEventListener("load", () => adjustDropdown());
+    }
+  }
+  customElements.define("drop-down", Dropdown);
+</script>
