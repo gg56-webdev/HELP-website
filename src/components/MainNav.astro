@@ -1,8 +1,7 @@
 ---
 import Dropdown from "@/components/Dropdown.astro";
 import { SITE_LINKS } from "@/constants.ts";
-import type { Link } from "@/types";
-import type { ComponentProps } from "astro/types";
+import type { Link, LinkBase } from "@/types";
 import { getAbsoluteLocaleUrl, getRelativeLocaleUrl } from "astro:i18n";
 import { useTranslation, type AvailableLocales } from "i18n";
 
@@ -20,65 +19,91 @@ const {
   FLAGSHIP,
 } = SITE_LINKS;
 
-const lang = Astro.currentLocale as AvailableLocales;
+const currentLocale = Astro.currentLocale as AvailableLocales;
 
-const t = useTranslation(lang);
+const t = useTranslation(currentLocale);
 
-const links: Array<Link | ComponentProps<typeof Dropdown>> = [
-  { title: t("link.home"), href: getRelativeLocaleUrl(lang, HOME) },
+const links: Array<Link | (LinkBase & { links: Link[] })> = [
+  { title: t("link.home"), href: getRelativeLocaleUrl(currentLocale, HOME) },
   {
     title: t("dropdown.what-we-do"),
     links: [
-      { title: t("link.in-brief"), href: getRelativeLocaleUrl(lang, BRIEF) },
+      {
+        title: t("link.in-brief"),
+        href: getRelativeLocaleUrl(currentLocale, BRIEF),
+      },
       {
         title: t("link.panel-discussions"),
-        href: getRelativeLocaleUrl(lang, DISCUSSIONS),
+        href: getRelativeLocaleUrl(currentLocale, DISCUSSIONS),
       },
       {
         title: t("link.past-meetings"),
-        href: getRelativeLocaleUrl(lang, MEETINGS),
+        href: getRelativeLocaleUrl(currentLocale, MEETINGS),
       },
       {
         title: t("link.documentation"),
-        href: getRelativeLocaleUrl(lang, DOCUMENTS),
+        href: getRelativeLocaleUrl(currentLocale, DOCUMENTS),
       },
     ],
   },
-  { title: t("link.newsroom"), href: getRelativeLocaleUrl(lang, NEWS) },
+  {
+    title: t("link.newsroom"),
+    href: getRelativeLocaleUrl(currentLocale, NEWS),
+  },
   {
     title: t("dropdown.about"),
     links: [
-      { title: t("link.who-we-are"), href: getRelativeLocaleUrl(lang, ABOUT) },
+      {
+        title: t("link.who-we-are"),
+        href: getRelativeLocaleUrl(currentLocale, ABOUT),
+      },
       {
         title: t("link.background"),
-        href: getRelativeLocaleUrl(lang, BACKGROUND),
+        href: getRelativeLocaleUrl(currentLocale, BACKGROUND),
       },
       {
         title: t("link.network"),
-        href: getRelativeLocaleUrl(lang, NETWORK),
+        href: getRelativeLocaleUrl(currentLocale, NETWORK),
       },
       {
         title: t("link.contact"),
-        href: getRelativeLocaleUrl(lang, CONTACT),
+        href: getRelativeLocaleUrl(currentLocale, CONTACT),
       },
     ],
   },
   {
     title: t("link.flagship-initiatives"),
-    href: getAbsoluteLocaleUrl(lang, FLAGSHIP),
+    href: getAbsoluteLocaleUrl(currentLocale, FLAGSHIP),
   },
 ];
 ---
 
 <nav class="flex">
-  <ul class="flex gap-8 uppercase tracking-wide hover:*:underline">
+  <ul class="flex gap-8 uppercase">
     {
       links.map((i) => {
         const isDropdown = "links" in i;
         return (
-          <li>
+          <li class="hover:underline">
             {isDropdown ? (
-              <Dropdown links={i.links} title={i.title} />
+              <Dropdown>
+                <span slot="button">{i.title}</span>
+                <ul class="rounded-lg bg-white py-2 normal-case text-black shadow">
+                  {i.links.map(({ title, href }) => (
+                    <li>
+                      <a
+                        class="block px-4 py-2 transition hover:bg-blue-400"
+                        class:list={[
+                          { "bg-blue-200": Astro.url.pathname === href },
+                        ]}
+                        {href}
+                      >
+                        {title}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </Dropdown>
             ) : (
               <a href={i.href}>{i.title}</a>
             )}

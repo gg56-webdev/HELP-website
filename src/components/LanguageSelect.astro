@@ -1,6 +1,12 @@
 ---
+import { Image, getImage } from "astro:assets";
 import { getRelativeLocaleUrl } from "astro:i18n";
-import { defaultLocale, languages } from "i18n";
+import { defaultLocale, languages, type AvailableLocales } from "i18n";
+import Dropdown from "./Dropdown.astro";
+
+const flags: ImageMetadata[] = await Astro.glob("../assets/flags/*").then(
+  (files) => files.map((f) => f.default),
+);
 
 const {
   currentLocale,
@@ -10,22 +16,33 @@ const {
 const path = currentLocale === defaultLocale ? pathname : pathname.slice(4);
 ---
 
-<label for="language" class="sr-only">Select language</label>
-<select
-  name="language"
-  id="language"
-  class="text-black"
-  onchange="location = this.value"
->
-  {
-    languages.map(({ name, lang }) => (
-      <option
-        value={getRelativeLocaleUrl(lang, path)}
-        selected={lang === currentLocale}
-        {lang}
-      >
-        {} {name}
-      </option>
-    ))
-  }
-</select>
+<Dropdown>
+  <Image
+    slot="button"
+    class="inline-block w-6 border"
+    src={flags.find((f) => f.src.includes(currentLocale!))!}
+    alt={` flag`}
+  />
+  <ul class="rounded-lg bg-white py-2 normal-case text-black shadow">
+    {
+      languages.map(({ name, lang }) => (
+        <li>
+          <a
+            class="block px-4 py-2 transition hover:bg-blue-400"
+            class:list={[{ "bg-blue-200": lang === currentLocale }]}
+            href={getRelativeLocaleUrl(lang, path)}
+            {lang}
+            aria-current={lang === currentLocale ? "page" : null}
+          >
+            <Image
+              class="inline-block w-6 border"
+              src={flags.find((f) => f.src.includes(lang))!}
+              alt={`${name} flag`}
+            />
+            {name}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</Dropdown>

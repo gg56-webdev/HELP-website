@@ -1,2 +1,2 @@
-export type Base = { title: string };
-export type Link = Base & { href: string };
+export type LinkBase = { title: string };
+export type Link = LinkBase & { href: string };
