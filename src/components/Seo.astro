@@ -1,0 +1,70 @@
+---
+import { languages, defaultLocale } from "i18n";
+
+export type Props = {
+  title?: string;
+  ogTitle?: string;
+  description?: string;
+  ogDescription?: string;
+  image?: { src: string | URL; alt: string };
+  noIndex?: boolean;
+};
+
+const { url, currentLocale } = Astro;
+
+const {
+  title,
+  ogTitle,
+  description,
+  ogDescription,
+  image = { src: new URL("/og/default.jpg", url), alt: "HELP logo" },
+  noIndex = false,
+} = Astro.props;
+
+const titleTemplate = title
+  ? `${title} | HELP`
+  : "High-level Experts and Leaders Panel on Water and Disasters";
+---
+
+<title>{titleTemplate}</title>
+<meta name="title" content={titleTemplate} />
+<meta name="description" content={description} />
+
+<link rel="canonical" href={url} />
+
+{
+  languages.map(({ lang }) => {
+    if (currentLocale === lang) return null;
+    // TODO: figure out how to add alternate to specific page
+    return (
+      <link
+        rel="alternate"
+        hreflang={lang}
+        href={new URL(lang === defaultLocale ? "/" : lang, url.origin)}
+      />
+    );
+  })
+}
+
+<meta
+  property="og:site_name"
+  content="High-level Experts and Leaders Panel on Water and Disasters"
+/>
+<meta property="og:title" content={ogTitle ?? titleTemplate} />
+<meta property="og:description" content={ogDescription ?? description} />
+<meta property="og:url" content={url} />
+<meta property="og:image" content={image.src} />
+<meta property="og:image:url" content={image.src} />
+<meta property="og:image:secure_url" content={image.src} />
+<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={image.alt} />
+
+<meta name="twitter:title" content={titleTemplate} />
+<meta name="twitter:description" content={ogDescription ?? description} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content={image.src} />
+<meta name="twitter:image:alt" content={image.alt} />
+
+<meta name="robots" content={noIndex ? "noindex, nofollow" : "index, follow"} />
