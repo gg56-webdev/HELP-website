@@ -92,9 +92,9 @@ const links: Array<Link | (LinkBase & { links: Link[] })> = [
                   {i.links.map(({ title, href }) => (
                     <li>
                       <a
-                        class="block px-4 py-2 transition hover:bg-blue-400"
+                        class="hover:bg-main/75 block px-4 py-2 transition"
                         class:list={[
-                          { "bg-blue-200": Astro.url.pathname === href },
+                          { "bg-main/50": Astro.url.pathname === href },
                         ]}
                         {href}
                       >

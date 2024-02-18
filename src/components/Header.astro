@@ -4,7 +4,7 @@ import LanguageSelect from "@/components/LanguageSelect.astro";
 ---
 
 <header
-  class="fixed z-50 w-full bg-blue-600 text-white supports-[animation-timeline:scroll()]:bg-transparent"
+  class="bg-main fixed z-50 w-full text-white supports-[animation-timeline:scroll()]:bg-transparent"
 >
   <div class="mx-auto max-w-screen-lg space-y-2 px-2 py-2">
     <strong id="org" class="text-sm" lang="en"
@@ -30,7 +30,7 @@ import LanguageSelect from "@/components/LanguageSelect.astro";
 
     @keyframes change-bg {
       to {
-        @apply bg-blue-600 shadow;
+        @apply bg-main -mt-11 shadow;
       }
     }
   }
