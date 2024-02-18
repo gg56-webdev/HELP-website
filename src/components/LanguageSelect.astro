@@ -22,6 +22,7 @@ const path = currentLocale === defaultLocale ? pathname : pathname.slice(4);
     class="inline-block w-6 border"
     src={flags.find((f) => f.src.includes(currentLocale!))!}
     alt={` flag`}
+    loading="eager"
   />
   <ul class="rounded-lg bg-white py-2 normal-case text-black shadow">
     {
