@@ -29,7 +29,7 @@ const path = currentLocale === defaultLocale ? pathname : pathname.slice(4);
       languages.map(({ name, lang }) => (
         <li>
           <a
-            class="hover:bg-main/75 block px-4 py-2 transition"
+            class="block px-4 py-2 transition hover:bg-main/75"
             class:list={[{ "bg-main/50": lang === currentLocale }]}
             href={getRelativeLocaleUrl(lang, path)}
             {lang}

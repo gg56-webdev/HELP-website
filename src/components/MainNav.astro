@@ -97,15 +97,14 @@ const links: Array<Link | (LinkBase & { links: Link[] })> = [
                           { "bg-main/50": Astro.url.pathname === href },
                         ]}
                         {href}
-                      >
-                        {title}
-                      </a>
+                        set:text={title}
+                      />
                     </li>
                   ))}
                 </ul>
               </Dropdown>
             ) : (
-              <a href={i.href}>{i.title}</a>
+              <a href={i.href} set:text={i.title} />
             )}
           </li>
         );
