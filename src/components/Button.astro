@@ -1,0 +1,23 @@
+---
+import type { HTMLTag, Polymorphic } from "astro/types";
+
+type Props<Tag extends HTMLTag> = Polymorphic<{
+  as: Tag;
+  variant?: "primary" | "secondary";
+}>;
+
+const { as: Tag, variant = "primary", ...props } = Astro.props;
+---
+
+<Tag
+  class:list={[
+    "inline-flex h-9 items-center justify-center whitespace-nowrap rounded-lg px-4 py-2 font-medium transition-colors focus-visible:outline  disabled:pointer-events-none disabled:opacity-50",
+    {
+      "bg-main text-white hover:bg-main/90": variant === "primary",
+      "bg-white text-main hover:bg-gray-100": variant === "secondary",
+    },
+  ]}
+  {...props}
+>
+  <slot /></Tag
+>
