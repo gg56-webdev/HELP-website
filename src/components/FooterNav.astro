@@ -1,0 +1,83 @@
+---
+import Dropdown from "@/components/Dropdown.astro";
+import { SITE_LINKS } from "@/constants.ts";
+import type { Link, LinkBase } from "@/types";
+import { getAbsoluteLocaleUrl, getRelativeLocaleUrl } from "astro:i18n";
+import { useTranslation, type AvailableLocales } from "i18n";
+
+const {
+  HOME,
+  BRIEF,
+  DISCUSSIONS,
+  MEETINGS,
+  DOCUMENTS,
+  NEWS,
+  ABOUT,
+  BACKGROUND,
+  NETWORK,
+  CONTACT,
+  FLAGSHIP,
+} = SITE_LINKS;
+
+const currentLocale = Astro.currentLocale as AvailableLocales;
+
+const t = useTranslation(currentLocale);
+
+const links: Array<Link | (LinkBase & { links: Link[] })> = [
+  { title: t("link.home"), href: getRelativeLocaleUrl(currentLocale, HOME) },
+  {
+    title: t("dropdown.what-we-do"),
+    links: [
+      {
+        title: t("link.in-brief"),
+        href: getRelativeLocaleUrl(currentLocale, BRIEF),
+      },
+      {
+        title: t("link.panel-discussions"),
+        href: getRelativeLocaleUrl(currentLocale, DISCUSSIONS),
+      },
+      {
+        title: t("link.past-meetings"),
+        href: getRelativeLocaleUrl(currentLocale, MEETINGS),
+      },
+      {
+        title: t("link.documentation"),
+        href: getRelativeLocaleUrl(currentLocale, DOCUMENTS),
+      },
+    ],
+  },
+  {
+    title: t("link.newsroom"),
+    href: getRelativeLocaleUrl(currentLocale, NEWS),
+  },
+  {
+    title: t("dropdown.about"),
+    links: [
+      {
+        title: t("link.who-we-are"),
+        href: getRelativeLocaleUrl(currentLocale, ABOUT),
+      },
+      {
+        title: t("link.background"),
+        href: getRelativeLocaleUrl(currentLocale, BACKGROUND),
+      },
+      {
+        title: t("link.network"),
+        href: getRelativeLocaleUrl(currentLocale, NETWORK),
+      },
+      {
+        title: t("link.contact"),
+        href: getRelativeLocaleUrl(currentLocale, CONTACT),
+      },
+    ],
+  },
+  {
+    title: t("link.flagship-initiatives"),
+    href: getAbsoluteLocaleUrl(currentLocale, FLAGSHIP),
+  },
+];
+---
+
+<div class="">
+  <nav></nav>
+</div>
