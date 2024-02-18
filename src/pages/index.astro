@@ -2,21 +2,22 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Disasters from "@/components/home/Disasters.astro";
 import News from "@/components/News.astro";
+import Button from "@/components/Button.astro";
 ---
 
 <BaseLayout title="">
   <main>
     <section id="hero" class="min-h-dvh bg-slate-500">
-      <div class="relative mx-auto min-h-dvh max-w-screen-lg">
+      <div class="relative mx-auto min-h-dvh max-w-screen-xl">
         <div
-          class="bg-main/75 absolute bottom-0 right-0 max-w-[50ch] space-y-4 p-8 text-white"
+          class="absolute bottom-0 right-0 max-w-[50ch] space-y-4 bg-main/75 p-8 text-white"
         >
           <h1 class="text-4xl font-bold">Water is life.</h1>
           <p class="text-lg">
             Yet in the face of escalating threats like pollution and scarcity,
             collaboration is vital for a sustainable future.
           </p>
-          <button>Our mission</button>
+          <Button as="a" href="/" variant="secondary">Our Mission</Button>
         </div>
       </div>
     </section>
