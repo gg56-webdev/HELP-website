@@ -78,8 +78,8 @@ const links: Array<Link | (LinkBase & { links: Link[] })> = [
 ];
 ---
 
-<nav class="flex">
-  <ul class="flex gap-8 uppercase">
+<nav>
+  <ul class="flex gap-12 uppercase">
     {
       links.map((i) => {
         const isDropdown = "links" in i;
