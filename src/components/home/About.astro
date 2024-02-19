@@ -3,6 +3,7 @@ import { Image } from "astro:assets";
 import about1 from "@/assets/images/home/about-1.jpg";
 import about2 from "@/assets/images/home/about-2.jpg";
 import about3 from "@/assets/images/home/about-3.jpg";
+import video from "@/assets/videos/about-1.mp4";
 import Button from "@/components/Button.astro";
 ---
 
@@ -109,6 +110,16 @@ import Button from "@/components/Button.astro";
       </p>
       <Button as="a" href="/">More About Water Disasters</Button>
     </div>
-    <div></div>
+    <div>
+      <video
+        src={video}
+        width="1920"
+        height="1080"
+        class="rounded-lg object-cover"
+        autoplay
+        loop
+        muted
+        playsinline></video>
+    </div>
   </div>
 </section>
