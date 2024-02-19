@@ -1,0 +1,32 @@
+---
+import Button from "@/components/Button.astro";
+import video from "@/assets/videos/1.mp4";
+---
+
+<section
+  id="hero"
+  class="relative min-h-dvh bg-blue-900 after:absolute after:inset-0 after:bg-black/50"
+>
+  <video
+    src={video}
+    width="960"
+    height="540"
+    class="absolute h-full w-full object-cover"
+    autoplay
+    loop
+    muted
+    playsinline></video>
+
+  <div class="relative z-10 mx-auto min-h-dvh max-w-screen-xl">
+    <div
+      class="absolute bottom-0 right-0 max-w-[50ch] space-y-4 bg-main/75 p-8 text-white"
+    >
+      <h1 class="text-4xl font-bold">Water is life.</h1>
+      <p class="text-lg">
+        Yet in the face of escalating threats like pollution and scarcity,
+        collaboration is vital for a sustainable future.
+      </p>
+      <Button as="a" href="/" variant="secondary">Our Mission</Button>
+    </div>
+  </div>
+</section>
