@@ -1,74 +1,83 @@
 ---
-import Dropdown from "@/components/Dropdown.astro";
 import { SITE_LINKS } from "@/constants.ts";
-import type { Link, LinkBase } from "@/types";
-import { getAbsoluteLocaleUrl, getRelativeLocaleUrl } from "astro:i18n";
+import { getRelativeLocaleUrl } from "astro:i18n";
 import { useTranslation, type AvailableLocales } from "i18n";
 
-const {
-  HOME,
-  BRIEF,
-  DOCUMENTS,
-  NEWS,
-  ABOUT,
-  BACKGROUND,
-  NETWORK,
-  CONTACT,
-  FLAGSHIP,
-} = SITE_LINKS;
+const { BRIEF, NEWS, ABOUT, NETWORK, CONTACT, COVID_19, FLAGSHIP, DISASTERS } =
+  SITE_LINKS;
 
 const currentLocale = Astro.currentLocale as AvailableLocales;
 
 const t = useTranslation(currentLocale);
 
-const links: Array<Link | (LinkBase & { links: Link[] })> = [
-  { title: t("link.home"), href: getRelativeLocaleUrl(currentLocale, HOME) },
+const links = [
   {
-    title: t("dropdown.what-we-do"),
+    groupTitle: "HELP",
     links: [
       {
-        title: t("link.in-brief"),
-        href: getRelativeLocaleUrl(currentLocale, BRIEF),
-      },
-
-      {
-        title: t("link.documentation"),
-        href: getRelativeLocaleUrl(currentLocale, DOCUMENTS),
-      },
-    ],
-  },
-  {
-    title: t("link.newsroom"),
-    href: getRelativeLocaleUrl(currentLocale, NEWS),
-  },
-  {
-    title: t("dropdown.about"),
-    links: [
-      {
-        title: t("link.who-we-are"),
-        href: getRelativeLocaleUrl(currentLocale, ABOUT),
-      },
-      {
-        title: t("link.background"),
-        href: getRelativeLocaleUrl(currentLocale, BACKGROUND),
-      },
-      {
-        title: t("link.network"),
         href: getRelativeLocaleUrl(currentLocale, NETWORK),
+        title: t("link.network"),
       },
       {
-        title: t("link.contact"),
-        href: getRelativeLocaleUrl(currentLocale, CONTACT),
+        href: getRelativeLocaleUrl(currentLocale, BRIEF),
+        title: t("link.in-brief"),
+      },
+      {
+        href: getRelativeLocaleUrl(currentLocale, ABOUT),
+        title: t("link.who-we-are"),
       },
     ],
   },
   {
-    title: t("link.flagship-initiatives"),
-    href: getAbsoluteLocaleUrl(currentLocale, FLAGSHIP),
+    groupTitle: "Initiatives",
+    links: [
+      {
+        href: getRelativeLocaleUrl(currentLocale, FLAGSHIP),
+        title: t("link.flagship-initiatives"),
+      },
+      {
+        href: getRelativeLocaleUrl(currentLocale, NEWS),
+        title: t("link.newsroom"),
+      },
+    ],
+  },
+  {
+    groupTitle: "Resources",
+    links: [
+      {
+        href: getRelativeLocaleUrl(currentLocale, CONTACT),
+        title: t("link.contact"),
+      },
+      {
+        href: getRelativeLocaleUrl(currentLocale, DISASTERS),
+        title: t("link.disasters"),
+      },
+      {
+        href: getRelativeLocaleUrl(currentLocale, COVID_19),
+        title: t("link.covid-19"),
+      },
+    ],
   },
 ];
 ---
 
-<div class="">
-  <nav></nav>
+<div class="bg-slate-100">
+  <nav class="mx-auto max-w-screen-md px-2 py-8">
+    <ul class="flex flex-wrap gap-x-32 gap-y-8">
+      {
+        links.map(({ groupTitle, links }) => (
+          <li>
+            <span class=" text-lg font-bold uppercase">{groupTitle}</span>
+            <ul class="mt-2 space-y-1">
+              {links.map(({ title, href }) => (
+                <li>
+                  <a {href} set:text={title} class="hover:underline" />
+                </li>
+              ))}
+            </ul>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
 </div>
