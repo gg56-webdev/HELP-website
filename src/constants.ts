@@ -1,9 +1,8 @@
 export const SITE_LINKS = {
   HOME: "",
   BRIEF: "brief",
-  DISCUSSIONS: "discussions",
-  MEETINGS: "meetings",
   DOCUMENTS: "documents",
+  COVID_19: "covid-19",
   NEWS: "news",
   ABOUT: "about",
   BACKGROUND: "background",

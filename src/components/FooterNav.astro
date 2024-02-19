@@ -8,8 +8,6 @@ import { useTranslation, type AvailableLocales } from "i18n";
 const {
   HOME,
   BRIEF,
-  DISCUSSIONS,
-  MEETINGS,
   DOCUMENTS,
   NEWS,
   ABOUT,
@@ -32,14 +30,7 @@ const links: Array<Link | (LinkBase & { links: Link[] })> = [
         title: t("link.in-brief"),
         href: getRelativeLocaleUrl(currentLocale, BRIEF),
       },
-      {
-        title: t("link.panel-discussions"),
-        href: getRelativeLocaleUrl(currentLocale, DISCUSSIONS),
-      },
-      {
-        title: t("link.past-meetings"),
-        href: getRelativeLocaleUrl(currentLocale, MEETINGS),
-      },
+
       {
         title: t("link.documentation"),
         href: getRelativeLocaleUrl(currentLocale, DOCUMENTS),
