@@ -9,4 +9,5 @@ export const SITE_LINKS = {
   NETWORK: "network",
   CONTACT: "contact",
   FLAGSHIP: "flagship-initiatives",
+  DISASTERS: "water-disasters",
 } as const;

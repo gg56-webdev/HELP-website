@@ -26,6 +26,7 @@ export const ui = {
     "link.network": "HELP Network",
     "link.contact": "Contact Us",
     "link.flagship-initiatives": "Flagship initiatives",
+    "link.disasters": "Water Disasters",
   },
   fr: {
     "link.home": "Accueil",
