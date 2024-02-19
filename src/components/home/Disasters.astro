@@ -31,11 +31,7 @@ const list = [
       list.map(([text, src]) => (
         <li>
           <figure class="grid place-items-center *:[grid-area:1/1/1/1]">
-            <Image
-              {src}
-              alt={`photo of ${text}.`}
-              class="h-80 w-full object-cover"
-            />
+            <Image {src} alt={text} class="h-80 w-full object-cover" />
             <figcaption class="group grid h-full w-full place-items-center bg-main/60 text-xl font-bold transition hover:opacity-0">
               {text}
             </figcaption>
