@@ -1,16 +1,23 @@
 ---
+import disaster1 from "@/assets/images/home/disaster-1.jpg";
+import disaster2 from "@/assets/images/home/disaster-2.jpg";
+import disaster3 from "@/assets/images/home/disaster-3.jpg";
+import disaster4 from "@/assets/images/home/disaster-4.jpg";
+import disaster5 from "@/assets/images/home/disaster-5.jpg";
+import { Image } from "astro:assets";
+
 const list = [
-  ["Flood"],
-  ["Tsunami"],
-  ["Pollution"],
-  ["Drought"],
-  ["Contamination"],
-];
+  ["Flood", disaster1],
+  ["Tsunami", disaster2],
+  ["Pollution", disaster3],
+  ["Drought", disaster4],
+  ["Contamination", disaster5],
+] as const;
 ---
 
-<section id="disasters">
+<section id="disasters" class="space-y-8">
   <div class="mx-auto max-w-[50ch] space-y-4 text-center">
-    <h2>Understand Water Disasters</h2>
+    <h2 class="text-main">Understand Water Disasters</h2>
     <p class="">
       Understanding and discussing water disasters are essential steps in
       addressing the challenges they pose to our society and the world's
@@ -18,12 +25,21 @@ const list = [
     </p>
   </div>
   <ul
-    class="*:bg-main relative flex gap-0.5 text-center text-white *:h-48 *:flex-1 *:transition-all before:absolute before:left-1/2 before:-translate-x-1/2 before:border-[30px] before:border-b-0 before:border-white before:border-x-transparent before:transition hover:before:opacity-0 motion-safe:hover:*:grow-[1.5]"
+    class="relative flex gap-0.5 text-center text-white *:flex-1 *:bg-main *:transition-all before:absolute before:left-1/2 before:-translate-x-1/2 before:border-[30px] before:border-b-0 before:border-white before:border-x-transparent before:transition hover:before:opacity-0 motion-safe:hover:*:grow-[1.5]"
   >
     {
-      list.map(([text]) => (
-        <li class="grid place-items-center">
-          <div>{text}</div>
+      list.map(([text, src]) => (
+        <li>
+          <figure class="grid place-items-center *:[grid-area:1/1/1/1]">
+            <Image
+              {src}
+              alt={`photo of ${text}.`}
+              class="h-60 w-full object-cover"
+            />
+            <figcaption class="group grid h-full w-full place-items-center bg-main/60 text-xl font-bold transition hover:opacity-0">
+              {text}
+            </figcaption>
+          </figure>
         </li>
       ))
     }
