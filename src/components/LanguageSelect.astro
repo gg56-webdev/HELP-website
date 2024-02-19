@@ -1,10 +1,10 @@
 ---
-import { Image, getImage } from "astro:assets";
+import { Image } from "astro:assets";
 import { getRelativeLocaleUrl } from "astro:i18n";
-import { defaultLocale, languages, type AvailableLocales } from "i18n";
+import { defaultLocale, languages } from "i18n";
 import Dropdown from "./Dropdown.astro";
 
-const flags: ImageMetadata[] = await Astro.glob("../assets/flags/*").then(
+const flags: ImageMetadata[] = await Astro.glob("../assets/svg/flags/*").then(
   (files) => files.map((f) => f.default),
 );
 
