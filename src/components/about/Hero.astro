@@ -1,0 +1,28 @@
+---
+import { Image } from "astro:assets";
+import hero1 from "@/assets/images/about/hero-1.jpg";
+---
+
+<section id="hero" class="">
+  <div class="mx-auto grid max-w-screen-lg grid-cols-2 items-center gap-8 px-2">
+    <div>
+      <Image
+        loading="eager"
+        src={hero1}
+        alt="Dr. Han Seung-soo"
+        class="mx-auto rounded-lg"
+      />
+    </div>
+    <div class="space-y-4">
+      <blockquote
+        class={`before:[content:open-quote] before:font-serif before:block before:text-7xl/[0.5] before:font-bold before:text-main text-lg `}
+      >
+        PLEASE PROVIDE A SHORT TEXT FOR THIS PLEASE PROVIDE A SHORT TEXT FOR
+        THIS PLEASE PROVIDE A SHORT TEXT FOR THIS PLEASE PROVIDE A SHORT TEXT
+        FOR THIS
+      </blockquote>
+      <h1 class="text-4xl">Dr. Han Seung-soo</h1>
+      <p class="text-2xl text-gray-700">Chair of HELP</p>
+    </div>
+  </div>
+</section>
