@@ -13,11 +13,9 @@ const isHome =
 
 <header
   class:list={[
-    "z-50 w-full",
-    { "sticky top-0 text-black": !isHome },
+    "fixed z-50 w-full bg-white text-black shadow-lg supports-[animation-timeline:scroll()]:bg-transparent supports-[animation-timeline:scroll()]:shadow-none",
     {
-      "fixed  bg-main text-white supports-[animation-timeline:scroll()]:bg-transparent":
-        isHome,
+      "supports-[animation-timeline:scroll()]:text-white ": isHome,
     },
   ]}
 >
