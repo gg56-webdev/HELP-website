@@ -1,10 +1,25 @@
 ---
 import MainNav from "@/components/MainNav.astro";
 import LanguageSelect from "@/components/LanguageSelect.astro";
+import { defaultLocale } from "i18n";
+const {
+  currentLocale,
+  url: { pathname },
+} = Astro;
+
+const isHome =
+  (currentLocale === defaultLocale ? pathname : pathname.slice(3)) === "/";
 ---
 
 <header
-  class="fixed z-50 w-full bg-main text-white supports-[animation-timeline:scroll()]:bg-transparent"
+  class:list={[
+    "z-50 w-full",
+    { "sticky top-0 text-black": !isHome },
+    {
+      "fixed  bg-main text-white supports-[animation-timeline:scroll()]:bg-transparent":
+        isHome,
+    },
+  ]}
 >
   <div class="mx-auto max-w-screen-xl space-y-2 px-2 py-2">
     <strong id="org" class="text-sm" lang="en"
@@ -30,7 +45,7 @@ import LanguageSelect from "@/components/LanguageSelect.astro";
 
     @keyframes change-bg {
       to {
-        @apply -mt-11 bg-main shadow;
+        @apply -mt-11 bg-main text-white shadow;
       }
     }
   }

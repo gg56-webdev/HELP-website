@@ -47,25 +47,8 @@ const links: Array<Link | (LinkBase & { links: Link[] })> = [
     href: getRelativeLocaleUrl(currentLocale, NEWS),
   },
   {
-    title: t("dropdown.about"),
-    links: [
-      {
-        title: t("link.who-we-are"),
-        href: getRelativeLocaleUrl(currentLocale, ABOUT),
-      },
-      {
-        title: t("link.background"),
-        href: getRelativeLocaleUrl(currentLocale, BACKGROUND),
-      },
-      {
-        title: t("link.network"),
-        href: getRelativeLocaleUrl(currentLocale, NETWORK),
-      },
-      {
-        title: t("link.contact"),
-        href: getRelativeLocaleUrl(currentLocale, CONTACT),
-      },
-    ],
+    title: t("link.who-we-are"),
+    href: getRelativeLocaleUrl(currentLocale, ABOUT),
   },
   {
     title: t("link.flagship-initiatives"),
