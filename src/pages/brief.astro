@@ -1,0 +1,18 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Challenges from "@/components/brief/Challenges.astro";
+import Meetings from "@/components/brief/Meetings.astro";
+import Hero from "@/components/brief/Hero.astro";
+import Stats from "@/components/brief/Stats.astro";
+import Why from "@/components/brief/Why.astro";
+---
+
+<BaseLayout>
+  <main class="space-y-40 py-32">
+    <Hero />
+    <Why />
+    <Stats />
+    <Challenges />
+    <Meetings />
+  </main>
+</BaseLayout>

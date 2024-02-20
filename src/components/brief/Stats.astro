@@ -1,0 +1,46 @@
+---
+import Button from "@/components/Button.astro";
+---
+
+<!-- TODO: add water related bg -->
+<section id="stats" class="bg-main/15 py-32">
+  <div class="mx-auto grid max-w-screen-lg grid-cols-2 items-center px-2">
+    <dl class="grid gap-12">
+      {
+        [
+          ["Flagship Initiatives", 4],
+          ["Members", 21],
+          ["Countries Represented", 10],
+        ].map(([dt, dd]) => (
+          <div class="flex flex-col-reverse gap-2">
+            <dt set:text={dt} class="text-2xl" />
+            <dd set:html={dd} class="text-6xl font-bold text-main" />
+          </div>
+        ))
+      }
+    </dl>
+    <div class="space-y-[1.5em]">
+      <h2>
+        We provide our expertise and experience to assist the international
+        community
+      </h2>
+      <p>
+        The establishment of the High-level Experts and Leaders Panel on Water
+        and Disasters (HELP) signifies a crucial step in supporting the
+        international community, governments, and stakeholders in confronting
+        the pressing challenges posed by water-related disasters. Recognizing
+        the significance of mobilizing political will and resources.
+      </p>
+      <p>
+        HELP is dedicated to promoting proactive actions aimed at raising
+        awareness, fostering coordination and collaboration, and establishing
+        common goals and targets. By monitoring progress and implementing
+        effective measures, HELP seeks to address the multifaceted issues
+        surrounding water and disasters, ensuring a concerted global effort to
+        mitigate their impacts.
+      </p>
+      <!-- TODO: update link -->
+      <Button as="a" href="/">Our Flagship Initiatives</Button>
+    </div>
+  </div>
+</section>

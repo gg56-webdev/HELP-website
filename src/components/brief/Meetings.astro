@@ -1,0 +1,172 @@
+---
+import { Image } from "astro:assets";
+import meetings1 from "@/assets/images/brief/meetings-1.jpg";
+import meetings2 from "@/assets/images/brief/meetings-2.jpg";
+import meetings3 from "@/assets/images/brief/meetings-3.jpg";
+
+// TODO: add images
+---
+
+<section id="past-meetings" class="mx-auto max-w-screen-lg space-y-8 px-2">
+  <h2 class="text-center text-4xl">Past Meetings</h2>
+  <ul class="grid grid-cols-3 gap-4 text-center">
+    {
+      (
+        [
+          [
+            "High-Level Expert Panel on Water and Disaster (HLEP/UNSGAB)",
+            meetings1,
+            "Flooded street.",
+          ],
+          [
+            "Environmental DNA Tokyo Meeting of the High-Level Expert Panel on Water and Disaster (28 April 2011)",
+            meetings2,
+            "Garbage in the ocean.",
+          ],
+          [
+            "UN Special Thematic Session on Water and Disasters (6 March 2013)",
+            meetings3,
+            "Person caring a child across flooded area.",
+          ],
+        ] as const
+      ).map(([h3, src, alt], i) => (
+        <li class="overflow-hidden rounded-lg shadow">
+          <button
+            type="button"
+            data-meeting={i + 1}
+            class="group flex h-full flex-col"
+          >
+            <Image
+              {src}
+              {alt}
+              class="aspect-video object-cover transition-transform group-hover:scale-105"
+            />
+            <h3
+              set:text={h3}
+              class="relative z-10 grid grow place-items-center bg-blue-100 p-4"
+            />
+          </button>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<dialog
+  class="pointer-events-none fixed inset-0 !m-auto block rounded-lg p-8 opacity-0 transition backdrop:cursor-pointer open:pointer-events-auto open:opacity-100"
+>
+  <button type="button" id="close-modal" class="absolute right-4">Close</button>
+</dialog>
+
+<template data-meeting="1">
+  <article class="prose">
+    <h1 class="text-lg">
+      High-Level Expert Panel on Water and Disaster (HLEP/UNSGAB)
+    </h1>
+    <p>
+      The High-Level Expert Panel on Water and Disaster (HLEP/UNSGAB) was
+      convened at the request of the UN Secretary General’s Advisory Board on
+      water and Sanitation (UNSGAB) in 2007, under the Presidency of H.E. Dr.
+      Han Seung-soo, Prime Minister of the Republic of Korea and Former
+      President of the Korea Water Forum. The HELP included 21 experts in
+      disaster preparedness and response and international issues, and was
+      co-moderated by the World Water Council, the UN Secretariat for the
+      International Strategy for Disaster Reduction (UNISDR), the Japan Water
+      Forum and the Korea Water Forum.
+    </p>
+    <p>
+      As the fruit of serious and devoted efforts from its participants, and
+      united in its sincere wish to build a safer world, HLEP created the report
+      “Water and Disaster” which was launched during the 4th World Water Forum
+      in Istanbul.
+    </p>
+    <a
+      href="http://www.waterforum.jp/eng/high_panel/"
+      target="_blank"
+      rel="noopener noreferrer">Learn more about HLEP/UNSGAB</a
+    >
+  </article>
+</template>
+<template data-meeting="2">
+  <article class="prose">
+    <h1 class="text-lg">
+      Tokyo Meeting of the High-Level Expert Panel on Water and Disaster (28
+      April 2011)
+    </h1>
+    <p>
+      In the wake of the Great East Japan Earthquake and Tsunami on 11 March
+      2011, the HLEP/UNSGAB gathered in Tokyo for an urgent meeting. The
+      overwhelming consensus of the one-day meeting underlined that ‘lessons
+      learned’ from the Japanese and other natural disasters should be quickly
+      and rigorously applied, that disaster management and prevention were
+      increasingly inter-related and could no longer be treated in isolation and
+      that far greater cooperation at state, regional and international levels
+      was needed. The meeting, co-hosted by the Japan International Cooperation
+      Agency (JICA) and attended by international experts and government
+      delegates, called for a series of immediate actions, including a special
+      or plenary UN session on water-related disasters, and strengthening of
+      regional cooperation, etc.
+    </p>
+    <a
+      href="http://www.jica.go.jp/english/news/field/2011/20110428_01.html"
+      target="_blank"
+      rel="noopener noreferrer"
+      >Learn more about Tokyo Meeting of the High-Level Expert Panel on Water
+      and Disaster</a
+    >
+  </article>
+</template>
+<template data-meeting="3">
+  <article class="prose">
+    <h1 class="text-lg">
+      UN Special Thematic Session on Water and Disasters (6 March 2013)
+    </h1>
+    <p>
+      The UN Special Thematic Session on Water and Disasters was convened as an
+      initiative of UN Secretary-General Ban Ki-moon at the UN Headquarters. The
+      session was organized by the Secretary-General, Secretary General’s
+      Advisory Board on Water and Sanitation (UNSGAB), and HLEP/UNSGAB. It was
+      the first event in the UN history to have dedicated discussion on the
+      subject of water and disasters.
+    </p>
+    <p>
+      The session underscored “water and disasters” as one of the most
+      important, pressing issues the international community should urgently
+      address at the highest levels. Furthermore, the Special Meeting of the
+      High Level Experts Panel on Water and Disaster (HLEP/UNSGAB) held in
+      conjunction with the Special Thematic Session proposed to strengthen
+      HLEP/UNSGAB by inviting more political leaders and government
+      representatives into the panel members and renaming the panel from
+      HLEP/UNSGAB to “High-level Experts and Leaders Panel on Water and
+      Disasters (HELP).”
+    </p>
+  </article>
+</template>
+
+<script>
+  const $dialog = document.querySelector("dialog")!;
+  const $items = document.querySelectorAll<HTMLLIElement>(
+    "button[data-meeting]",
+  );
+
+  $items.forEach((i) =>
+    i.addEventListener("click", (ev) => {
+      const { meeting } = i.dataset;
+      const $template = document.querySelector<HTMLTemplateElement>(
+        `template[data-meeting="${meeting}"]`,
+      )!;
+      const lastArticle = $dialog.querySelector("article");
+      lastArticle && $dialog.removeChild(lastArticle);
+      $dialog.appendChild($template?.content.cloneNode(true));
+      $dialog.showModal();
+    }),
+  );
+
+  document
+    .querySelector("#close-modal")
+    ?.addEventListener("click", () => $dialog.close());
+
+  $dialog.addEventListener("click", ({ target }) => {
+    if ((target as HTMLDialogElement).nodeName === "DIALOG") $dialog.close();
+  });
+</script>

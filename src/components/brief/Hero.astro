@@ -1,0 +1,27 @@
+---
+import { Image } from "astro:assets";
+import hero1 from "@/assets/images/brief/hero-1.png";
+---
+
+<section
+  id="hero"
+  class="mx-auto grid max-w-screen-lg grid-cols-2 items-center px-2"
+>
+  <div>
+    <Image
+      loading="eager"
+      src={hero1}
+      alt="water drop with a city inside."
+      class="mx-auto"
+    />
+  </div>
+  <div class="space-y-4">
+    <h1 class="text-5xl">
+      <span class="text-main">HELP</span>: Addressing Water and Disasters
+    </h1>
+    <p class="text-2xl text-gray-700">
+      Strategizing Comprehensive Solutions for Global Water Resilience and
+      Effective Disaster Management
+    </p>
+  </div>
+</section>

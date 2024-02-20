@@ -1,0 +1,29 @@
+---
+import { Image } from "astro:assets";
+import challenges1 from "@/assets/images/brief/challenges-1.jpg";
+import challenges2 from "@/assets/images/brief/challenges-2.jpg";
+// TODO: update images
+---
+
+<section id="challenges" class="mx-auto max-w-screen-xl space-y-40 px-2">
+  <div class="grid items-center gap-16 md:grid-cols-2">
+    <div class="grid gap-4 *:rounded-lg">
+      <Image
+        src={challenges1}
+        alt="Business meeting."
+        class="justify-self-end"
+      />
+      <Image src={challenges2} alt="Business meeting." />
+    </div>
+    <div class="space-y-[1.5em]">
+      <h2>The Challenges</h2>
+      <p>
+        Water disasters present formidable challenges for human society,
+        jeopardizing lives, livelihoods, and ecosystems, necessitating
+        comprehensive strategies to mitigate their impact and enhance
+        resilience. Addressing the intertwined challenges of "water and
+        disasters" is imperative for sustainable development.
+      </p>
+    </div>
+  </div>
+</section>
