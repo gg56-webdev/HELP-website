@@ -5,6 +5,7 @@ import Icon from "@/components/Icon.astro";
 import Seo from "@/components/Seo.astro";
 import "@/style.css";
 import type { ComponentProps } from "astro/types";
+import { ViewTransitions } from "astro:transitions";
 
 type Props = ComponentProps<typeof Seo>;
 ---
@@ -16,6 +17,7 @@ type Props = ComponentProps<typeof Seo>;
     <meta name="viewport" content="width=device-width" />
     <Seo {...Astro.props} />
     <Icon />
+    <ViewTransitions />
     <meta name="generator" content={Astro.generator} />
   </head>
   <body>

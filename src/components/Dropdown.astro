@@ -63,7 +63,8 @@ const { showArrow = true } = Astro.props;
       };
 
       window.addEventListener("resize", debounce(adjustDropdown));
-      window.addEventListener("load", () => adjustDropdown());
+      window.addEventListener("load", adjustDropdown);
+      document.addEventListener("astro:page-load", adjustDropdown);
     }
   }
   customElements.define("drop-down", Dropdown);
