@@ -80,6 +80,7 @@ import meetings3 from "@/assets/images/brief/meetings-3.jpg";
       “Water and Disaster” which was launched during the 4th World Water Forum
       in Istanbul.
     </p>
+    <!-- TODO: check if link is correct -->
     <a
       href="http://www.waterforum.jp/eng/high_panel/"
       target="_blank"
@@ -144,29 +145,31 @@ import meetings3 from "@/assets/images/brief/meetings-3.jpg";
 </template>
 
 <script>
-  const $dialog = document.querySelector("dialog")!;
-  const $items = document.querySelectorAll<HTMLLIElement>(
-    "button[data-meeting]",
-  );
+  document.addEventListener("astro:page-load", () => {
+    const $dialog = document.querySelector("dialog")!;
+    const $items = document.querySelectorAll<HTMLLIElement>(
+      "button[data-meeting]",
+    );
 
-  $items.forEach((i) =>
-    i.addEventListener("click", (ev) => {
-      const { meeting } = i.dataset;
-      const $template = document.querySelector<HTMLTemplateElement>(
-        `template[data-meeting="${meeting}"]`,
-      )!;
-      const lastArticle = $dialog.querySelector("article");
-      lastArticle && $dialog.removeChild(lastArticle);
-      $dialog.appendChild($template?.content.cloneNode(true));
-      $dialog.showModal();
-    }),
-  );
+    $items.forEach((i) =>
+      i.addEventListener("click", (ev) => {
+        const { meeting } = i.dataset;
+        const $template = document.querySelector<HTMLTemplateElement>(
+          `template[data-meeting="${meeting}"]`,
+        )!;
+        const lastArticle = $dialog.querySelector("article");
+        lastArticle && $dialog.removeChild(lastArticle);
+        $dialog.appendChild($template?.content.cloneNode(true));
+        $dialog.showModal();
+      }),
+    );
 
-  document
-    .querySelector("#close-modal")
-    ?.addEventListener("click", () => $dialog.close());
+    document
+      .querySelector("#close-modal")
+      ?.addEventListener("click", () => $dialog.close());
 
-  $dialog.addEventListener("click", ({ target }) => {
-    if ((target as HTMLDialogElement).nodeName === "DIALOG") $dialog.close();
+    $dialog.addEventListener("click", ({ target }) => {
+      if ((target as HTMLDialogElement).nodeName === "DIALOG") $dialog.close();
+    });
   });
 </script>
