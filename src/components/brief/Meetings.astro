@@ -55,7 +55,8 @@ import meetings3 from "@/assets/images/brief/meetings-3.jpg";
 <dialog
   class="pointer-events-none fixed inset-0 !m-auto block rounded-lg p-8 opacity-0 transition backdrop:cursor-pointer open:pointer-events-auto open:opacity-100"
 >
-  <button type="button" id="close-modal" class="absolute right-4">Close</button>
+  <button type="button" id="close-dialog" class="absolute right-4">Close</button
+  >
 </dialog>
 
 <template data-meeting="1">
@@ -146,30 +147,33 @@ import meetings3 from "@/assets/images/brief/meetings-3.jpg";
 
 <script>
   document.addEventListener("astro:page-load", () => {
-    const $dialog = document.querySelector("dialog")!;
-    const $items = document.querySelectorAll<HTMLLIElement>(
+    const $dialog = document.querySelector("dialog");
+    const $items = document.querySelectorAll<HTMLButtonElement>(
       "button[data-meeting]",
     );
 
-    $items.forEach((i) =>
-      i.addEventListener("click", (ev) => {
-        const { meeting } = i.dataset;
-        const $template = document.querySelector<HTMLTemplateElement>(
-          `template[data-meeting="${meeting}"]`,
-        )!;
-        const lastArticle = $dialog.querySelector("article");
-        lastArticle && $dialog.removeChild(lastArticle);
-        $dialog.appendChild($template?.content.cloneNode(true));
-        $dialog.showModal();
-      }),
-    );
+    if ($dialog) {
+      $items.forEach((i) =>
+        i.addEventListener("click", () => {
+          const { meeting } = i.dataset;
+          const $template = document.querySelector<HTMLTemplateElement>(
+            `template[data-meeting="${meeting}"]`,
+          )!;
+          const lastArticle = $dialog.querySelector("article");
+          lastArticle && $dialog.removeChild(lastArticle);
+          $dialog.appendChild($template?.content.cloneNode(true));
+          $dialog.showModal();
+        }),
+      );
 
-    document
-      .querySelector("#close-modal")
-      ?.addEventListener("click", () => $dialog.close());
+      $dialog
+        .querySelector<HTMLButtonElement>("#close-dialog")
+        ?.addEventListener("click", () => $dialog.close());
 
-    $dialog.addEventListener("click", ({ target }) => {
-      if ((target as HTMLDialogElement).nodeName === "DIALOG") $dialog.close();
-    });
+      $dialog.addEventListener("click", ({ target }) => {
+        if ((target as HTMLDialogElement).nodeName === "DIALOG")
+          $dialog.close();
+      });
+    }
   });
 </script>
