@@ -7,11 +7,11 @@ import disaster5 from "@/assets/images/home/disaster-5.jpg";
 import { Image } from "astro:assets";
 
 const list = [
-  ["Flood", disaster1],
-  ["Tsunami", disaster2],
-  ["Pollution", disaster3],
-  ["Drought", disaster4],
-  ["Contamination", disaster5],
+  ["Flood", disaster1, "Person surviving during flooding.."],
+  ["Tsunami", disaster2, "Seashore before tsunami."],
+  ["Pollution", disaster3, "Garbage on the seashore."],
+  ["Drought", disaster4, "Slightly submerged dead trees."],
+  ["Contamination", disaster5, "Oil stains on the seashore."],
 ] as const;
 ---
 
@@ -28,10 +28,10 @@ const list = [
     class="relative flex gap-0.5 text-center text-white *:flex-1 *:bg-main *:transition-all before:absolute before:left-1/2 before:-translate-x-1/2 before:border-[30px] before:border-b-0 before:border-white before:border-x-transparent before:transition hover:before:opacity-0 motion-safe:hover:*:grow-[1.5]"
   >
     {
-      list.map(([text, src]) => (
+      list.map(([text, src, alt]) => (
         <li>
           <figure class="grid place-items-center *:[grid-area:1/1/1/1]">
-            <Image {src} alt={text} class="h-80 w-full object-cover" />
+            <Image {src} {alt} class="h-80 w-full object-cover" />
             <figcaption class="group grid h-full w-full place-items-center bg-main/60 text-xl font-bold transition hover:opacity-0">
               {text}
             </figcaption>
