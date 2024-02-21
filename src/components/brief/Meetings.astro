@@ -30,7 +30,7 @@ import meetings3 from "@/assets/images/brief/meetings-3.jpg";
           ],
         ] as const
       ).map(([h3, src, alt], i) => (
-        <li class="overflow-hidden rounded-lg shadow">
+        <li class="overflow-hidden rounded-lg border border-gray-300 shadow">
           <button
             type="button"
             data-meeting={i + 1}
@@ -43,7 +43,7 @@ import meetings3 from "@/assets/images/brief/meetings-3.jpg";
             />
             <h3
               set:text={h3}
-              class="relative z-10 grid grow place-items-center bg-blue-100 p-4"
+              class="relative z-10 grid grow place-items-center  p-4"
             />
           </button>
         </li>
