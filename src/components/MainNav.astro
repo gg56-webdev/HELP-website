@@ -5,18 +5,7 @@ import type { Link, LinkBase } from "@/types";
 import { getAbsoluteLocaleUrl, getRelativeLocaleUrl } from "astro:i18n";
 import { useTranslation, type AvailableLocales } from "i18n";
 
-const {
-  HOME,
-  BRIEF,
-  DOCUMENTS,
-  COVID_19,
-  NEWS,
-  ABOUT,
-  BACKGROUND,
-  NETWORK,
-  CONTACT,
-  FLAGSHIP,
-} = SITE_LINKS;
+const { HOME, BRIEF, DOCUMENTS, COVID_19, NEWS, ABOUT, FLAGSHIP } = SITE_LINKS;
 
 const currentLocale = Astro.currentLocale as AvailableLocales;
 
@@ -24,6 +13,10 @@ const t = useTranslation(currentLocale);
 
 const links: Array<Link | (LinkBase & { links: Link[] })> = [
   { title: t("link.home"), href: getRelativeLocaleUrl(currentLocale, HOME) },
+  {
+    title: t("link.who-we-are"),
+    href: getRelativeLocaleUrl(currentLocale, ABOUT),
+  },
   {
     title: t("dropdown.what-we-do"),
     links: [
@@ -43,16 +36,12 @@ const links: Array<Link | (LinkBase & { links: Link[] })> = [
     ],
   },
   {
-    title: t("link.newsroom"),
-    href: getRelativeLocaleUrl(currentLocale, NEWS),
-  },
-  {
-    title: t("link.who-we-are"),
-    href: getRelativeLocaleUrl(currentLocale, ABOUT),
-  },
-  {
     title: t("link.flagship-initiatives"),
     href: getAbsoluteLocaleUrl(currentLocale, FLAGSHIP),
+  },
+  {
+    title: t("link.newsroom"),
+    href: getRelativeLocaleUrl(currentLocale, NEWS),
   },
 ];
 ---
