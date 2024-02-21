@@ -1,0 +1,25 @@
+<section
+  id="chair"
+  class="mx-auto max-w-screen-lg space-y-4 px-2 after:mt-8 after:block after:h-1 after:w-16 after:bg-main"
+>
+  <h2 class="text-4xl">Chair of HELP</h2>
+  <h3 class="text-2xl">Dr. Han Seung-soo</h3>
+  <ul class="list-item list-disc space-y-4 marker:text-main">
+    {
+      [
+        "Former Prime Minister of the Republic of Korea (2008-09)",
+        "Founding Chair, High-Level Experts and Leaders Panel on Water and Disasters (2007-)",
+        "President of the 56th Session of the UN General Assembly (2001-02)",
+        "Special Envoy of the UN Secretary-General for Climate Change (2007-08) and for Disaster Risk Reduction and Water (2013-18)",
+        "Member, the UN Secretary-General’s Advisory Board on Water and Sanitation (UNSGAB) (2004-15)",
+        "Chair, ADB Water Advisory Group (2014-)",
+        "Founding Chair, Global Green Growth Institute (2010-12)",
+        "Korea’s Minister of Trade and Industry (1988-90), Ambassador to the US (1993-94), Chief Secretary to the President (1994-95) Deputy Prime Minister and Minister of Finance (1996-97), and Minister of Foreign Affairs (2001-02)",
+        "Member of the Korean National Assembly (1988-2004)",
+        "Professor of Economics at Seoul National University (1970-88)",
+        "Received the Nobel Peace Prize on behalf of the United Nations  (2001)",
+        "Received the honorary knighthood (KBE) from Queen Elizabeth II of the United Kingdom (2004)",
+      ].map((title) => <li set:text={title} />)
+    }
+  </ul>
+</section>
