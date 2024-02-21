@@ -1,0 +1,62 @@
+---
+import { Image } from "astro:assets";
+import Button from "@/components/Button.astro";
+import initiative1 from "@/assets/images/flagship-initiatives/initiatives-1.jpg";
+import initiative2 from "@/assets/images/flagship-initiatives/initiatives-2.jpg";
+import initiative3 from "@/assets/images/flagship-initiatives/initiatives-3.jpg";
+
+const list = [
+  [
+    [initiative1, ""],
+    "Climate Change",
+    "This initiative is led by the Government of the Netherlands.",
+    "https://unglobalcompact.nl/",
+  ],
+  [
+    [initiative2, ""],
+    "Financing and Investment for Water-related DRR",
+    "This initiative is led by the Ministry of Land, Infrastructure, Transport and Tourism of Japan.",
+    "https://www.wateranddisaster.org/investment-and-financing-for-addressing-water-related-disasters/",
+  ],
+  [
+    [initiative3, ""],
+    "Alliance of Alliances for Water-related DRR Researches",
+    "This initiative is led by International Centre for Water Hazard and Risk Management (ICHARM) and Sichuan University, China.",
+    "",
+  ],
+] as const;
+---
+
+<section id="past-meetings" class="mx-auto max-w-screen-lg space-y-8 px-2">
+  <h2 class="text-center text-4xl">Initiatives</h2>
+  <ul class="grid grid-cols-3 gap-4 text-center">
+    {
+      list.map(([[src, alt], h3, p, href], i) => (
+        <li class="overflow-hidden rounded-lg border border-gray-300 shadow">
+          <article class="flex h-full flex-col">
+            <Image
+              {src}
+              {alt}
+              class="aspect-video object-cover transition-transform group-hover:scale-105"
+            />
+            <div class="grid h-full gap-4 p-4">
+              <h3 set:text={h3} />
+              <p set:text={p} />
+              {href && (
+                <Button
+                  as="a"
+                  class="self-end"
+                  {href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Learn more
+                </Button>
+              )}
+            </div>
+          </article>
+        </li>
+      ))
+    }
+  </ul>
+</section>
