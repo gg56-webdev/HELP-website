@@ -7,8 +7,13 @@ import { Image } from "astro:assets";
   id="hero"
   class="relative grid place-items-center bg-blue-900 *:[grid-area:1/1/1/1] after:absolute after:inset-0 after:bg-blue-900/80"
 >
-  <Image src={hero1} alt="" class="h-full max-h-[75dvh] w-full object-cover" />
-  <div class="relative z-10 space-y-4 px-2 text-center text-white">
-    <h1 class="text-4xl">COVID-19 – Information Center</h1>
-  </div>
+  <Image
+    loading="eager"
+    src={hero1}
+    alt=""
+    class="h-[75dvh] w-full object-cover"
+  />
+  <h1 class="relative z-10 px-2 text-center text-4xl text-white">
+    COVID-19 – Information Center
+  </h1>
 </section>

@@ -1,5 +1,8 @@
 ---
 import Button from "@/components/Button.astro";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { SITE_LINKS } from "@/constants";
+import type { AvailableLocales } from "i18n";
 ---
 
 <!-- TODO: add water related bg -->
@@ -39,8 +42,13 @@ import Button from "@/components/Button.astro";
         surrounding water and disasters, ensuring a concerted global effort to
         mitigate their impacts.
       </p>
-      <!-- TODO: update link -->
-      <Button as="a" href="/">Our Flagship Initiatives</Button>
+      <Button
+        as="a"
+        href={getRelativeLocaleUrl(
+          Astro.currentLocale as AvailableLocales,
+          SITE_LINKS.FLAGSHIP,
+        )}>Our Flagship Initiatives</Button
+      >
     </div>
   </div>
 </section>

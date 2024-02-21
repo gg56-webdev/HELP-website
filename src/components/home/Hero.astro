@@ -1,7 +1,9 @@
 ---
 import Button from "@/components/Button.astro";
-import video from "@/assets/videos/1.mp4";
-// TODO: preload and optimize video
+import hero1 from "@/assets/videos/home/hero-1.mp4";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { SITE_LINKS } from "@/constants";
+import type { AvailableLocales } from "i18n";
 ---
 
 <section
@@ -9,7 +11,7 @@ import video from "@/assets/videos/1.mp4";
   class="relative min-h-dvh bg-blue-900 after:absolute after:inset-0 after:bg-black/50"
 >
   <video
-    src={video}
+    src={hero1}
     width="960"
     height="540"
     class="absolute h-full w-full object-cover"
@@ -27,7 +29,14 @@ import video from "@/assets/videos/1.mp4";
         Yet in the face of escalating threats like pollution and scarcity,
         collaboration is vital for a sustainable future.
       </p>
-      <Button as="a" href="/" variant="secondary">Our Mission</Button>
+      <Button
+        as="a"
+        href={getRelativeLocaleUrl(
+          Astro.currentLocale as AvailableLocales,
+          SITE_LINKS.BRIEF,
+        )}
+        variant="secondary">Our Mission</Button
+      >
     </div>
   </div>
 </section>

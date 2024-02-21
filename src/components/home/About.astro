@@ -3,8 +3,11 @@ import { Image } from "astro:assets";
 import about1 from "@/assets/images/home/about-1.jpg";
 import about2 from "@/assets/images/home/about-2.jpg";
 import about3 from "@/assets/images/home/about-3.jpg";
-import video from "@/assets/videos/about-1.mp4";
+import video1 from "@/assets/videos/home/about-1.mp4";
 import Button from "@/components/Button.astro";
+import { SITE_LINKS } from "@/constants";
+import type { AvailableLocales } from "i18n";
+import { getRelativeLocaleUrl } from "astro:i18n";
 ---
 
 <section id="about" class="mx-auto max-w-screen-xl space-y-40 px-2">
@@ -92,7 +95,13 @@ import Button from "@/components/Button.astro";
           Monitoring and Action
         </li>
       </ul>
-      <Button as="a" href="/">Who We Are</Button>
+      <Button
+        as="a"
+        href={getRelativeLocaleUrl(
+          Astro.currentLocale as AvailableLocales,
+          SITE_LINKS.ABOUT,
+        )}>Who We Are</Button
+      >
     </div>
   </div>
   <div class="grid items-center gap-16 md:grid-cols-2">
@@ -108,13 +117,19 @@ import Button from "@/components/Button.astro";
         sustainable development but also trigger political, social, and economic
         turmoil in various nations.
       </p>
-      <Button as="a" href="/">More About Water Disasters</Button>
+      <a
+        class="btn btn-primary max-sm:btn-block"
+        href={getRelativeLocaleUrl(
+          Astro.currentLocale as AvailableLocales,
+          SITE_LINKS.DISASTERS,
+        )}>More About Water Disasters</a
+      >
     </div>
     <div>
       <video
-        src={video}
-        width="1920"
-        height="1080"
+        src={video1}
+        width="600"
+        height="338"
         class="rounded-lg object-cover"
         autoplay
         loop
