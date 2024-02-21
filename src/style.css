@@ -18,3 +18,7 @@ h2 {
 p {
   @apply text-pretty;
 }
+
+[lang="ko"] {
+  word-break: keep-all;
+}
