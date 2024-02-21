@@ -61,23 +61,21 @@ const links = [
 ];
 ---
 
-<div class="bg-slate-100">
-  <nav class="mx-auto max-w-screen-md px-2 py-8">
-    <ul class="flex flex-wrap gap-x-32 gap-y-8">
-      {
-        links.map(({ groupTitle, links }) => (
-          <li>
-            <span class=" text-lg font-bold uppercase">{groupTitle}</span>
-            <ul class="mt-2 space-y-1">
-              {links.map(({ title, href }) => (
-                <li>
-                  <a {href} set:text={title} class="hover:underline" />
-                </li>
-              ))}
-            </ul>
-          </li>
-        ))
-      }
-    </ul>
-  </nav>
-</div>
+<nav>
+  <ul class="flex flex-wrap gap-x-32 gap-y-8">
+    {
+      links.map(({ groupTitle, links }) => (
+        <li>
+          <span class=" text-lg font-bold uppercase">{groupTitle}</span>
+          <ul class="mt-2 space-y-1">
+            {links.map(({ title, href }) => (
+              <li>
+                <a {href} set:text={title} class="hover:underline" />
+              </li>
+            ))}
+          </ul>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
