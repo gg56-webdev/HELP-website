@@ -1,0 +1,39 @@
+---
+import { Image } from "astro:assets";
+import about1 from "@/assets/images/covid-19/about-1.jpg";
+import about2 from "@/assets/images/covid-19/about-2.jpg";
+import Button from "@/components/Button.astro";
+---
+
+<section id="about" class="mx-auto max-w-screen-xl space-y-40 px-2">
+  <div class="grid items-center gap-16 md:grid-cols-2">
+    <div class="grid gap-4 *:rounded-lg">
+      <Image
+        src={about1}
+        alt="Person carrying a child over the flooded area."
+        class="w-4/5"
+      />
+      <Image
+        src={about2}
+        alt="Cyclone formation viewed from space."
+        class="w-4/5 justify-self-end"
+      />
+    </div>
+    <div class="space-y-[1.5em]">
+      <h2>HELP Actions during the Pandemic</h2>
+      <p>
+        HELP has actively tackled water-related disaster risk during COVID-19.
+        They developed and translated principles into multiple languages.
+        Despite vaccine progress, global sharing of experiences and practical
+        guidance remains vital. Thus, HELP introduced Guiding Principles for
+        Building a Resilient Post-Corona World, offering practical advice to
+        leaders and stakeholders for a sustainable future.
+      </p>
+      <p>
+        Languages available: English, French, Chinese, Spanish, Arabic, Russian,
+        Amharic, Bengali, Georgian, Hindi, Indonesian, Japanese, Korean, Kyrgyz,
+        Nepali, Singhala, Tagalog.
+      </p>
+    </div>
+  </div>
+</section>
