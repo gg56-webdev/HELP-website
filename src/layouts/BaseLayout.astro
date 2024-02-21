@@ -7,7 +7,7 @@ import "@/style.css";
 import type { ComponentProps } from "astro/types";
 import { ViewTransitions } from "astro:transitions";
 
-type Props = ComponentProps<typeof Seo>;
+type Props = ComponentProps<typeof Seo> & ComponentProps<typeof Header>;
 ---
 
 <!doctype html>
@@ -21,7 +21,7 @@ type Props = ComponentProps<typeof Seo>;
     <meta name="generator" content={Astro.generator} />
   </head>
   <body>
-    <Header />
+    <Header isInverted={Astro.props.isInverted} />
     <slot />
     <Footer />
   </body>

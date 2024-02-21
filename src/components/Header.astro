@@ -1,21 +1,17 @@
 ---
 import MainNav from "@/components/MainNav.astro";
 import LanguageSelect from "@/components/LanguageSelect.astro";
-import { defaultLocale } from "i18n";
-const {
-  currentLocale,
-  url: { pathname },
-} = Astro;
 
-const isHome =
-  (currentLocale === defaultLocale ? pathname : pathname.slice(3)) === "/";
+type Props = { isInverted?: boolean };
+
+const { isInverted = false } = Astro.props;
 ---
 
 <header
   class:list={[
     "fixed z-50 w-full bg-white text-black shadow-lg supports-[animation-timeline:scroll()]:bg-transparent supports-[animation-timeline:scroll()]:shadow-none",
     {
-      "supports-[animation-timeline:scroll()]:text-white ": isHome,
+      "supports-[animation-timeline:scroll()]:text-white ": isInverted,
     },
   ]}
 >
