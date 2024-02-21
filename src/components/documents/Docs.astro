@@ -1,0 +1,47 @@
+---
+import Button from "@/components/Button.astro";
+---
+
+<section id="documents" class="mx-auto max-w-screen-lg space-y-8">
+  <h2 class="text-center text-4xl">Documents</h2>
+  <ul class="grid auto-rows-fr grid-cols-3 gap-4">
+    {
+      [
+        `HELP Global Report on Water and Disasters 2023`,
+        `HELP Global Report on Water and Disasters 2022`,
+        `The Principles to Foster Peace before, during, and after Water-related Disasters`,
+        `HELP Guiding Principles for Drought Risk Management under a Changing Climate – Catalysing actions for climate-resilient drought –`,
+        `Follow-up of major recommendations made by UNSGAB in Nov. 2015`,
+        `HELP Global Report on Water and Disasters 2021`,
+        `HELP Global Report on Water and Disasters 2020`,
+        `Principles on Investment and Financing for Water-related Disaster Risk Reduction`,
+        `HELP Global Report on Water and Disasters 2019`,
+      ].map((article) => (
+        <li class="group relative isolate overflow-hidden rounded-lg border-2 border-main bg-white p-4 shadow transition hover:bg-main hover:text-white">
+          <article>
+            <h1 set:text={article} />
+          </article>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class=" absolute -bottom-4 right-0 -z-10 size-20 text-blue-100 transition-colors group-hover:text-blue-700"
+          >
+            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+            <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+            <path d="M10 9H8" />
+            <path d="M16 13H8" />
+            <path d="M16 17H8" />
+          </svg>
+        </li>
+      ))
+    }
+  </ul>
+  <div class="flex">
+    <Button as="a" class="ml-auto">Next →</Button>
+  </div>
+</section>
