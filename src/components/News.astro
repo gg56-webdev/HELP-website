@@ -2,7 +2,6 @@
 import news1 from "@/assets/images/home/news-1.jpg";
 import news2 from "@/assets/images/home/news-2.jpg";
 import news3 from "@/assets/images/home/news-3.jpg";
-import Button from "@/components/Button.astro";
 import { Image } from "astro:assets";
 
 const news = [
@@ -21,21 +20,27 @@ const news = [
 ] as const;
 ---
 
-<section id="news" class="mx-auto max-w-screen-lg space-y-8 px-2">
+<section id="news" class="mx-auto max-w-screen-lg space-y-8 px-4">
   <h2>A Relevant Actor in Times of Crisis</h2>
   <ul
-    class="flex gap-2 font-bold text-white *:flex-1 *:rounded-lg first:*:grow-[1.5] max-md:flex-col"
+    class="flex gap-4 font-bold text-white *:flex-1 *:rounded-lg first:*:grow-[1.5] max-md:flex-col"
   >
     {
       news.map(([title, src]) => (
-        <li class="group  overflow-hidden rounded-lg bg-slate-700">
-          <article class="grid h-full *:[grid-area:1/1/1/1]">
-            <Image {src} alt={title} class="h-60 w-full object-cover" />
-            <div class="grid h-full content-between bg-black/50 p-4">
-              <h3 class="line-clamp-3 group-first:text-2xl">{title}</h3>
-              <Button as="a" href="/" class="w-fit">
-                Read article →
-              </Button>
+        <li class="group">
+          <article class="card image-full h-full shadow-xl">
+            <figure>
+              <Image {src} alt={title} class="object-cover" />
+            </figure>
+            <div class="card-body">
+              <h3 class="card-title line-clamp-5 text-base text-white md:group-first:text-2xl">
+                {title}
+              </h3>
+              <div class="card-actions mt-auto">
+                <a href="/" class="btn btn-primary max-md:btn-block">
+                  Read Article →
+                </a>
+              </div>
             </div>
           </article>
         </li>

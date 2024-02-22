@@ -16,7 +16,7 @@ const list = [
 ---
 
 <section id="disasters" class="space-y-16">
-  <div class="mx-auto max-w-[50ch] space-y-4 text-center">
+  <div class="mx-auto max-w-[50ch] space-y-4 px-4 text-center">
     <h2 class="text-main">Understand Water Disasters</h2>
     <p class="">
       Understanding and discussing water disasters are essential steps in
@@ -31,7 +31,7 @@ const list = [
       list.map(([text, src, alt]) => (
         <li>
           <figure class="grid place-items-center *:[grid-area:1/1/1/1]">
-            <Image {src} {alt} class="h-80 w-full object-cover" />
+            <Image {src} {alt} class="h-40 w-full object-cover md:h-80" />
             <figcaption class="group grid h-full w-full place-items-center bg-main/60 text-xl font-bold transition hover:opacity-0">
               {text}
             </figcaption>

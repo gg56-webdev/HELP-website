@@ -1,24 +1,29 @@
 ---
-import { Image } from "astro:assets";
 import about1 from "@/assets/images/home/about-1.jpg";
 import about2 from "@/assets/images/home/about-2.jpg";
 import about3 from "@/assets/images/home/about-3.jpg";
 import video1 from "@/assets/videos/home/about-1.mp4";
-import Button from "@/components/Button.astro";
 import { SITE_LINKS } from "@/constants";
-import type { AvailableLocales } from "i18n";
+import { Image } from "astro:assets";
 import { getRelativeLocaleUrl } from "astro:i18n";
+import type { AvailableLocales } from "i18n";
 ---
 
-<section id="about" class="mx-auto max-w-screen-xl space-y-40 px-2">
+<section id="about" class="mx-auto max-w-screen-xl space-y-40 px-4">
   <div class="grid items-center gap-16 md:grid-cols-2">
-    <div class="grid gap-4 *:rounded-lg md:grid-cols-[1fr_auto]">
+    <div
+      class="grid grid-cols-2 gap-4 *:rounded-2xl *:shadow-lg sm:grid-cols-[auto_auto]"
+    >
       <Image
         src={about1}
         alt="Person carrying a child over the flooded area."
-        class="col-span-2 w-4/5 justify-self-end"
+        class="col-span-2 justify-self-end md:w-4/5"
       />
-      <Image src={about2} alt="Cyclone formation viewed from space." />
+      <Image
+        src={about2}
+        alt="Cyclone formation viewed from space."
+        class="w-full object-cover"
+      />
       <Image
         src={about3}
         alt="Road traffic during heavy rain."
@@ -96,12 +101,12 @@ import { getRelativeLocaleUrl } from "astro:i18n";
           Monitoring and Action
         </li>
       </ul>
-      <Button
-        as="a"
+      <a
+        class="btn btn-primary max-sm:btn-block"
         href={getRelativeLocaleUrl(
           Astro.currentLocale as AvailableLocales,
           SITE_LINKS.ABOUT,
-        )}>Who We Are</Button
+        )}>Who We Are</a
       >
     </div>
   </div>
@@ -131,7 +136,7 @@ import { getRelativeLocaleUrl } from "astro:i18n";
         src={video1}
         width="600"
         height="338"
-        class="rounded-lg object-cover"
+        class="w-full rounded-2xl object-cover shadow-lg"
         autoplay
         loop
         muted
