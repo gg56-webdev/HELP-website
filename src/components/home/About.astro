@@ -12,7 +12,7 @@ import { getRelativeLocaleUrl } from "astro:i18n";
 
 <section id="about" class="mx-auto max-w-screen-xl space-y-40 px-2">
   <div class="grid items-center gap-16 md:grid-cols-2">
-    <div class="grid grid-cols-[1fr_auto] gap-4 *:rounded-lg">
+    <div class="grid gap-4 *:rounded-lg md:grid-cols-[1fr_auto]">
       <Image
         src={about1}
         alt="Person carrying a child over the flooded area."
@@ -105,8 +105,8 @@ import { getRelativeLocaleUrl } from "astro:i18n";
       >
     </div>
   </div>
-  <div class="grid items-center gap-16 md:grid-cols-2">
-    <div class="space-y-[1.5em]">
+  <div class="max-md:grid- grid items-center gap-16 md:grid-cols-2">
+    <div class="space-y-[1.5em] max-md:order-1">
       <h2>
         Water-related disasters affect 90% of all disaster victims worldwide
       </h2>
@@ -126,7 +126,7 @@ import { getRelativeLocaleUrl } from "astro:i18n";
         )}>More About Water Disasters</a
       >
     </div>
-    <div>
+    <div class="">
       <video
         src={video1}
         width="600"
