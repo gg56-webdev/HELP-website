@@ -124,51 +124,57 @@ const list = [
 ] as const;
 ---
 
-<section id="documents" class="mx-auto max-w-screen-lg space-y-8 px-2">
+<section id="documents" class="mx-auto max-w-screen-xl space-y-8 px-4">
   <h2 class="text-center">
     HELP Principles to address Water-related DRR under the COVID-19 Pandemic
   </h2>
-  <ul class="grid auto-rows-fr gap-4 sm:grid-cols-2 md:grid-cols-3">
+  <ul class="grid gap-4 sm:auto-rows-fr sm:grid-cols-2 md:grid-cols-3">
     {
       list.map(([[article, href], [language, lang], author]) => {
         const isRtl = lang === "ar";
         return (
-          <li
-            dir={isRtl ? "rtl" : "ltr"}
-            class="group relative isolate overflow-hidden rounded-lg border-2 border-main bg-white p-4 shadow transition focus-within:bg-main focus-within:text-white hover:bg-main hover:text-white"
-          >
-            <article class:list={["grid h-full", { "text-right": isRtl }]}>
-              <div class="mb-2 space-y-2">
-                <p>{language}</p>
-                <h1 {lang}>
+          <li dir={isRtl ? "rtl" : "ltr"}>
+            <article
+              class="group card relative isolate h-full overflow-hidden border border-main/35 transition focus-within:bg-main focus-within:text-white hover:bg-main hover:text-white"
+              class:list={{ "text-right": isRtl }}
+            >
+              <div class="card-body">
+                <small class="badge badge-primary badge-outline group-focus-within:text-white group-hover:text-white">
+                  {language}
+                </small>
+                <h3 {lang} class="card-title text-base">
                   <a
-                    {href}
+                    href=""
                     class="outline-none after:absolute after:inset-0"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     {article}
                   </a>
-                </h1>
+                </h3>
+                {author && (
+                  <div class="card-actions mt-auto">
+                    <address>by {author}</address>
+                  </div>
+                )}
               </div>
-              {author && <address class="mt-auto">by {author}</address>}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class=" absolute -bottom-4 end-0 -z-10 size-20 text-blue-100 transition-colors group-focus-within:text-blue-700 group-hover:text-blue-700"
+              >
+                <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+                <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+                <path d="M10 9H8" />
+                <path d="M16 13H8" />
+                <path d="M16 17H8" />
+              </svg>
             </article>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class=" absolute -bottom-4 end-0 -z-10 size-20 text-blue-100 transition-colors group-focus-within:text-blue-700 group-hover:text-blue-700"
-            >
-              <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
-              <path d="M14 2v4a2 2 0 0 0 2 2h4" />
-              <path d="M10 9H8" />
-              <path d="M16 13H8" />
-              <path d="M16 17H8" />
-            </svg>
           </li>
         );
       })
