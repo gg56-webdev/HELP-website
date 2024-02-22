@@ -7,17 +7,19 @@ import type { AvailableLocales } from "i18n";
 
 <!-- TODO: add water related bg -->
 <section id="stats" class="bg-main/15 py-32">
-  <div class="mx-auto grid max-w-screen-lg grid-cols-2 items-center px-2">
-    <dl class="grid gap-12">
+  <div
+    class="mx-auto grid max-w-screen-lg items-center gap-16 px-2 md:grid-cols-2"
+  >
+    <dl class="grid items-start gap-y-12 max-md:grid-cols-3">
       {
         [
           ["Flagship Initiatives", 4],
           ["Members", 21],
           ["Countries Represented", 10],
         ].map(([dt, dd]) => (
-          <div class="flex flex-col-reverse gap-2">
-            <dt set:text={dt} class="text-2xl" />
-            <dd set:html={dd} class="text-6xl font-bold text-main" />
+          <div class="flex flex-col-reverse flex-wrap items-center gap-2 text-center">
+            <dt set:text={dt} class="md:text-2xl" />
+            <dd set:html={dd} class="text-6xl font-bold text-main " />
           </div>
         ))
       }
