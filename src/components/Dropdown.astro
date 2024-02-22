@@ -1,10 +1,11 @@
 ---
-type Props = { showArrow?: boolean };
+import type { HTMLAttributes } from "astro/types";
+type Props = { showArrow?: boolean } & HTMLAttributes<"div">;
 
-const { showArrow = true } = Astro.props;
+const { showArrow = true, class: styles, ...props } = Astro.props;
 ---
 
-<drop-down class="relative">
+<drop-down class:list={["relative", styles]} {...props}>
   <button type="button" class="group peer flex items-center uppercase">
     <slot name="button" />
     {

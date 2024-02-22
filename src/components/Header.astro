@@ -5,25 +5,49 @@ import LanguageSelect from "@/components/LanguageSelect.astro";
 type Props = { isInverted?: boolean };
 
 const { isInverted = false } = Astro.props;
+// TODO: check a11y on drawer buttons
 ---
 
 <header
   class:list={[
-    "fixed z-50 w-full bg-white text-black shadow-lg supports-[animation-timeline:scroll()]:bg-transparent supports-[animation-timeline:scroll()]:shadow-none",
+    "fixed z-40 w-full bg-white text-black shadow-lg supports-[animation-timeline:scroll()]:bg-transparent supports-[animation-timeline:scroll()]:shadow-none",
     {
       "supports-[animation-timeline:scroll()]:text-white ": isInverted,
     },
   ]}
 >
-  <div class="mx-auto max-w-screen-xl space-y-2 px-2 py-2">
-    <strong id="org" class="text-sm" lang="en"
+  <div class="mx-auto max-w-screen-xl px-2 py-2 lg:space-y-2">
+    <strong class="hidden text-sm lg:block" lang="en"
       >High-level Experts and Leaders Panel on Water and Disasters (HELP)</strong
     >
-    <hr />
-    <div class="flex items-center justify-between gap-4">
+    <hr class="hidden lg:block" />
+    <div class="flex items-center gap-4">
       <strong class="text-lg">HELP</strong>
       <MainNav />
       <LanguageSelect />
+      <label
+        for="drawer"
+        class="size-8 cursor-pointer lg:hidden"
+        aria-label="open navigation"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          class="h-full w-full"
+          stroke-linejoin="round"
+          ><line x1="4" x2="20" y1="12" y2="12"></line><line
+            x1="4"
+            x2="20"
+            y1="6"
+            y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg
+        >
+      </label>
     </div>
   </div>
 </header>
@@ -32,14 +56,26 @@ const { isInverted = false } = Astro.props;
   @supports (animation-timeline: scroll()) {
     header {
       @apply bg-transparent;
-      animation: change-bg linear both;
+      animation-name: change-bg;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
       animation-timeline: scroll();
       animation-range: 0 150px;
+
+      @media (width > 1024px) {
+        animation-name: change-bg, offset;
+      }
     }
 
     @keyframes change-bg {
       to {
-        @apply -mt-11 bg-main text-white shadow;
+        @apply bg-main text-white shadow;
+      }
+    }
+
+    @keyframes offset {
+      to {
+        @apply -mt-10;
       }
     }
   }

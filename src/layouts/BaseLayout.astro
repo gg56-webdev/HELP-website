@@ -1,6 +1,7 @@
 ---
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
+import DrawerContent from "@/components/DrawerContent.astro";
 import Icon from "@/components/Icon.astro";
 import Seo from "@/components/Seo.astro";
 import "@/style.css";
@@ -11,7 +12,7 @@ type Props = ComponentProps<typeof Seo> & ComponentProps<typeof Header>;
 ---
 
 <!doctype html>
-<html lang={Astro.currentLocale} class="has-[dialog[open]]:overflow-hidden">
+<html lang={Astro.currentLocale}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -21,8 +22,46 @@ type Props = ComponentProps<typeof Seo> & ComponentProps<typeof Header>;
     <meta name="generator" content={Astro.generator} />
   </head>
   <body>
-    <Header isInverted={Astro.props.isInverted} />
-    <slot />
-    <Footer />
+    <div>
+      <input
+        type="checkbox"
+        id="drawer"
+        class="fixed h-0 w-0 appearance-none opacity-0"
+      />
+      <div
+        id="drawer-side"
+        class="pointer-events-none fixed inset-0 z-50 grid *:[grid-area:1/1/1/1]"
+      >
+        <label
+          for="drawer"
+          aria-label="close menu"
+          class="pointer-events-none sticky inset-0 top-0 size-12 h-full w-full bg-transparent transition hover:cursor-pointer"
+        ></label>
+        <aside
+          class="ms-auto min-h-dvh w-[min(20rem,100%)] translate-x-[100%] bg-white shadow-lg motion-safe:transition motion-safe:duration-300"
+        >
+          <DrawerContent />
+        </aside>
+      </div>
+      <div id="content" class="transition">
+        <Header isInverted={Astro.props.isInverted} />
+        <slot />
+        <Footer />
+      </div>
+    </div>
+    <style>
+      #drawer:checked ~ #drawer-side {
+        @apply pointer-events-auto visible;
+      }
+      #drawer:checked ~ #drawer-side label {
+        @apply pointer-events-auto bg-black/25;
+      }
+      #drawer:checked ~ #drawer-side aside {
+        @apply translate-x-0;
+      }
+      #drawer:checked ~ #content {
+        @apply -translate-x-20;
+      }
+    </style>
   </body>
 </html>

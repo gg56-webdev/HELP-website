@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html:has(:where(dialog[open], #drawer:checked)) {
+  overflow: hidden;
+}
+
 h1,
 h2,
 h3,
