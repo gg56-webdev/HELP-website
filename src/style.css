@@ -26,3 +26,7 @@ p {
 [lang="ko"] {
   word-break: keep-all;
 }
+
+.btn-primary {
+  @apply text-white;
+}
