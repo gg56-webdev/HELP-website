@@ -22,46 +22,20 @@ type Props = ComponentProps<typeof Seo> & ComponentProps<typeof Header>;
     <meta name="generator" content={Astro.generator} />
   </head>
   <body>
-    <div>
-      <input
-        type="checkbox"
-        id="drawer"
-        class="fixed h-0 w-0 appearance-none opacity-0"
-      />
-      <div
-        id="drawer-side"
-        class="pointer-events-none fixed inset-0 z-50 grid *:[grid-area:1/1/1/1]"
-      >
-        <label
-          for="drawer"
-          aria-label="close menu"
-          class="pointer-events-none sticky inset-0 top-0 size-12 h-full w-full bg-transparent transition hover:cursor-pointer"
-        ></label>
-        <aside
-          class="ms-auto min-h-dvh w-[min(20rem,100%)] translate-x-[100%] bg-white shadow-lg motion-safe:transition motion-safe:duration-300"
-        >
-          <DrawerContent />
-        </aside>
-      </div>
-      <div id="content" class="transition">
+    <div class="drawer drawer-end">
+      <input id="drawer" type="checkbox" class="drawer-toggle" />
+      <div class="drawer-content">
         <Header isInverted={Astro.props.isInverted} />
         <slot />
         <Footer />
       </div>
+      <div class="drawer-side z-50">
+        <label for="drawer" aria-label="close sidebar" class="drawer-overlay"
+        ></label>
+        <aside class="min-h-full w-80 bg-base-100 p-4">
+          <DrawerContent />
+        </aside>
+      </div>
     </div>
-    <style>
-      #drawer:checked ~ #drawer-side {
-        @apply pointer-events-auto visible;
-      }
-      #drawer:checked ~ #drawer-side label {
-        @apply pointer-events-auto bg-black/25;
-      }
-      #drawer:checked ~ #drawer-side aside {
-        @apply translate-x-0;
-      }
-      #drawer:checked ~ #content {
-        @apply -translate-x-20;
-      }
-    </style>
   </body>
 </html>

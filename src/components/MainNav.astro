@@ -1,13 +1,13 @@
 ---
-import Dropdown from "@/components/Dropdown.astro";
 import { SITE_LINKS } from "@/constants.ts";
 import type { Link, LinkBase } from "@/types";
-import { getAbsoluteLocaleUrl, getRelativeLocaleUrl } from "astro:i18n";
+import { getRelativeLocaleUrl } from "astro:i18n";
 import { useTranslation, type AvailableLocales } from "i18n";
 
 const { HOME, BRIEF, DOCUMENTS, COVID_19, NEWS, ABOUT, FLAGSHIP } = SITE_LINKS;
 
 const currentLocale = Astro.currentLocale as AvailableLocales;
+const { pathname } = Astro.url;
 
 const t = useTranslation(currentLocale);
 
@@ -37,7 +37,7 @@ const links: Array<Link | (LinkBase & { links: Link[] })> = [
   },
   {
     title: t("link.flagship-initiatives"),
-    href: getAbsoluteLocaleUrl(currentLocale, FLAGSHIP),
+    href: getRelativeLocaleUrl(currentLocale, FLAGSHIP),
   },
   {
     title: t("link.newsroom"),
@@ -46,37 +46,67 @@ const links: Array<Link | (LinkBase & { links: Link[] })> = [
 ];
 ---
 
-<nav class="ms-auto hidden lg:block">
-  <ul class="flex gap-12 uppercase">
-    {
-      links.map((i) => {
-        const isDropdown = "links" in i;
-        return (
-          <li class="hover:underline">
-            {isDropdown ? (
-              <Dropdown>
-                <span slot="button">{i.title}</span>
-                <ul class="rounded-lg bg-white py-2 normal-case text-black shadow">
-                  {i.links.map(({ title, href }) => (
-                    <li>
-                      <a
-                        class="block px-4 py-2 transition hover:bg-main/65"
-                        class:list={[
-                          { "bg-main/50": Astro.url.pathname === href },
-                        ]}
-                        {href}
-                        set:text={title}
-                      />
-                    </li>
-                  ))}
-                </ul>
-              </Dropdown>
-            ) : (
-              <a href={i.href} set:text={i.title} />
-            )}
-          </li>
-        );
-      })
-    }
-  </ul>
-</nav>
+<ul class="flex items-center gap-8 max-md:hidden lg:text-lg">
+  {
+    links.map((item) => {
+      const isDropdown = "links" in item;
+      return (
+        <li>
+          {isDropdown ? (
+            <div class="group dropdown dropdown-hover">
+              <div
+                tabindex="0"
+                role="button"
+                class="flex items-center uppercase"
+                class:list={{
+                  "font-bold underline": item.links.some(
+                    ({ href }) => pathname === href,
+                  ),
+                }}
+              >
+                {item.title}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="ms-1 inline-block transition-transform group-hover:rotate-180"
+                >
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </div>
+              <ul
+                tabindex="0"
+                class="menu dropdown-content menu-lg z-[1] w-52 rounded-box bg-base-100 p-2 text-neutral shadow"
+              >
+                {item.links.map(({ href, title }) => (
+                  <li>
+                    <a
+                      {href}
+                      set:text={title}
+                      class:list={{ active: href === pathname }}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            <a
+              class="link-hover link uppercase"
+              class:list={{
+                "font-bold underline": item.href === pathname,
+              }}
+              href={item.href}
+              set:text={item.title}
+            />
+          )}
+        </li>
+      );
+    })
+  }
+</ul>

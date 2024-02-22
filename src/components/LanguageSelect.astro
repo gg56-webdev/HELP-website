@@ -2,7 +2,6 @@
 import { Image } from "astro:assets";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { defaultLocale, languages } from "i18n";
-import Dropdown from "./Dropdown.astro";
 
 const flags: ImageMetadata[] = await Astro.glob("../assets/svg/flags/*").then(
   (files) => files.map((f) => f.default),
@@ -12,25 +11,28 @@ const {
   currentLocale,
   url: { pathname },
 } = Astro;
-// WARNING: need to be careful if locale code is longer then 2
+// TODO: need to be careful if locale code is longer then 2
 const path = currentLocale === defaultLocale ? pathname : pathname.slice(4);
 ---
 
-<Dropdown class="ms-auto">
-  <Image
-    slot="button"
-    class="inline-block w-6 border"
-    src={flags.find((f) => f.src.includes(currentLocale!))!}
-    alt={` flag`}
-    loading="eager"
-  />
-  <ul class="rounded-lg bg-white py-2 normal-case text-black shadow">
+<div class="group dropdown dropdown-end ms-auto">
+  <div tabindex="0" role="button" class="grid place-items-center">
+    <Image
+      class="inline-block w-6 border"
+      src={flags.find((f) => f.src.includes(currentLocale!))!}
+      alt={`${languages.find(({ lang }) => lang === currentLocale)?.name} flag`}
+      loading="eager"
+    />
+  </div>
+  <ul
+    tabindex="0"
+    class="menu dropdown-content menu-md z-[1] w-40 rounded-box bg-base-100 p-2 text-neutral shadow"
+  >
     {
       languages.map(({ name, lang }) => (
         <li>
           <a
-            class="block px-4 py-2 transition hover:bg-main/75"
-            class:list={[{ "bg-main/50": lang === currentLocale }]}
+            class:list={[{ active: lang === currentLocale }]}
             href={getRelativeLocaleUrl(lang, path)}
             {lang}
             aria-current={lang === currentLocale ? "page" : null}
@@ -46,4 +48,4 @@ const path = currentLocale === defaultLocale ? pathname : pathname.slice(4);
       ))
     }
   </ul>
-</Dropdown>
+</div>

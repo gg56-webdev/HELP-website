@@ -1,40 +1,43 @@
 ---
 import { SITE_LINKS } from "@/constants.ts";
-import type { Link } from "@/types";
-import { getAbsoluteLocaleUrl, getRelativeLocaleUrl } from "astro:i18n";
+import type { Link, LinkBase } from "@/types";
+import { getRelativeLocaleUrl } from "astro:i18n";
 import { useTranslation, type AvailableLocales } from "i18n";
-import LanguageSelect from "./LanguageSelect.astro";
 
 const { HOME, BRIEF, DOCUMENTS, COVID_19, NEWS, ABOUT, FLAGSHIP } = SITE_LINKS;
 
 const currentLocale = Astro.currentLocale as AvailableLocales;
+const { pathname } = Astro.url;
 
 const t = useTranslation(currentLocale);
 
-const links: Array<Link> = [
+const links: Array<Link | (LinkBase & { links: Link[] })> = [
   { title: t("link.home"), href: getRelativeLocaleUrl(currentLocale, HOME) },
   {
     title: t("link.who-we-are"),
     href: getRelativeLocaleUrl(currentLocale, ABOUT),
   },
-
   {
-    title: t("link.in-brief"),
-    href: getRelativeLocaleUrl(currentLocale, BRIEF),
-  },
+    title: t("dropdown.what-we-do"),
+    links: [
+      {
+        title: t("link.in-brief"),
+        href: getRelativeLocaleUrl(currentLocale, BRIEF),
+      },
 
-  {
-    title: t("link.documentation"),
-    href: getRelativeLocaleUrl(currentLocale, DOCUMENTS),
+      {
+        title: t("link.documentation"),
+        href: getRelativeLocaleUrl(currentLocale, DOCUMENTS),
+      },
+      {
+        title: t("link.covid-19"),
+        href: getRelativeLocaleUrl(currentLocale, COVID_19),
+      },
+    ],
   },
-  {
-    title: t("link.covid-19"),
-    href: getRelativeLocaleUrl(currentLocale, COVID_19),
-  },
-
   {
     title: t("link.flagship-initiatives"),
-    href: getAbsoluteLocaleUrl(currentLocale, FLAGSHIP),
+    href: getRelativeLocaleUrl(currentLocale, FLAGSHIP),
   },
   {
     title: t("link.newsroom"),
@@ -43,39 +46,55 @@ const links: Array<Link> = [
 ];
 ---
 
-<div class="grid h-full auto-rows-min gap-4 overflow-auto p-4">
-  <label
-    for="drawer"
-    class="size-8 cursor-pointer justify-self-end"
-    aria-label="close navigation"
-  >
+<div class="grid">
+  <label for="drawer" class="btn btn-square btn-ghost ms-auto">
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
+      class="h-6 w-6"
       fill="none"
+      viewBox="0 0 24 24"
       stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      class="h-full w-full"
-      ><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg
+      ><path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M6 18L18 6M6 6l12 12"></path></svg
     >
   </label>
   <nav>
-    <ul class="space-y-2 text-lg">
+    <ul class="menu menu-lg">
       {
-        links.map((i) => (
-          <li>
-            <a
-              data-astro-reload
-              href={i.href}
-              set:text={i.title}
-              class="block rounded-lg p-2 transition hover:ring hover:ring-main"
-            />
-          </li>
-        ))
+        links.map((item) => {
+          const isDropdown = "links" in item;
+          return (
+            <li>
+              {isDropdown ? (
+                <>
+                  <div class="menu-title">{item.title}</div>
+                  <ul>
+                    {item.links.map(({ href, title }) => (
+                      <li>
+                        <a
+                          data-astro-reload
+                          {href}
+                          set:text={title}
+                          class:list={{ active: href === pathname }}
+                        />
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              ) : (
+                <a
+                  data-astro-reload
+                  href={item.href}
+                  set:text={item.title}
+                  class:list={{ active: item.href === pathname }}
+                />
+              )}
+            </li>
+          );
+        })
       }
     </ul>
   </nav>
