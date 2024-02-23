@@ -4,13 +4,15 @@ import logo from "@/assets/images/logo.png";
 import FooterNav from "./FooterNav.astro";
 ---
 
-<footer class="bg-slate-100">
-  <div
-    class="mx-auto flex max-w-screen-lg flex-col items-center justify-between gap-8 px-2 py-6 lg:flex-row"
-  >
+<footer class="bg-base-200 p-10 text-base-content">
+  <div class="footer mx-auto max-w-screen-lg max-md:footer-center">
     <FooterNav />
-    <Image src={logo} alt="HELP logo." class="w-24 object-contain" />
+    <aside class="mx-auto">
+      <Image src={logo} alt="HELP logo." class="w-24 object-contain" />
+    </aside>
   </div>
+</footer>
+<footer>
   <small class="block bg-main p-2 text-center text-xs text-white"
     >HELP © {new Date().getFullYear().toString()} All rights reserved.
   </small>

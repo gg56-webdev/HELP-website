@@ -27,6 +27,10 @@ p {
   word-break: keep-all;
 }
 
+.footer-title {
+  @apply opacity-100;
+}
+
 .btn-primary {
   @apply text-white;
 }

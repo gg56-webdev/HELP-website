@@ -61,21 +61,13 @@ const links = [
 ];
 ---
 
-<nav>
-  <ul class="flex flex-wrap gap-x-32 gap-y-8">
-    {
-      links.map(({ groupTitle, links }) => (
-        <li>
-          <span class=" text-lg font-bold uppercase">{groupTitle}</span>
-          <ul class="mt-2 space-y-1">
-            {links.map(({ title, href }) => (
-              <li>
-                <a {href} set:text={title} class="hover:underline" />
-              </li>
-            ))}
-          </ul>
-        </li>
-      ))
-    }
-  </ul>
-</nav>
+{
+  links.map(({ groupTitle, links }) => (
+    <nav>
+      <p class="footer-title" set:text={groupTitle} />
+      {links.map(({ title, href }) => (
+        <a {href} set:text={title} class="link-hover link" />
+      ))}
+    </nav>
+  ))
+}
