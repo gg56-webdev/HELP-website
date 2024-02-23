@@ -34,3 +34,7 @@ p {
 .btn-primary {
   @apply text-white;
 }
+
+.card {
+  @apply shadow-lg;
+}
