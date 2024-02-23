@@ -1,9 +1,8 @@
 ---
-import { Image } from "astro:assets";
-import Button from "@/components/Button.astro";
 import initiative1 from "@/assets/images/flagship-initiatives/initiatives-1.jpg";
 import initiative2 from "@/assets/images/flagship-initiatives/initiatives-2.jpg";
 import initiative3 from "@/assets/images/flagship-initiatives/initiatives-3.jpg";
+import { Image } from "astro:assets";
 
 const list = [
   [
@@ -16,7 +15,7 @@ const list = [
     [initiative2, ""],
     "Financing and Investment for Water-related DRR",
     "This initiative is led by the Ministry of Land, Infrastructure, Transport and Tourism of Japan.",
-    "https://www.wateranddisaster.org/investment-and-financing-for-addressing-water-related-disasters/",
+    "1",
   ],
   [
     [initiative3, ""],
@@ -29,30 +28,51 @@ const list = [
 
 <section id="past-meetings" class="mx-auto max-w-screen-lg space-y-8 px-2">
   <h2 class="text-center text-4xl">Initiatives</h2>
-  <ul class="grid grid-cols-3 gap-4 text-center">
+  <ul class="grid gap-4 md:grid-cols-3">
     {
       list.map(([[src, alt], h3, p, href]) => (
-        <li class="overflow-hidden rounded-lg border border-gray-300 shadow">
-          <article class="flex h-full flex-col">
-            <Image
-              {src}
-              {alt}
-              class="aspect-video object-cover transition-transform group-hover:scale-105"
-            />
-            <div class="grid h-full gap-4 p-4">
-              <h3 set:text={h3} />
+        <li class="">
+          <article class="card card-compact h-full border">
+            <figure>
+              <Image {src} {alt} class="aspect-video w-full object-cover " />
+            </figure>
+            <div class="card-body items-center text-center">
+              <h3 class="card-title" set:text={h3} />
               <p set:text={p} />
-              {href && (
-                <Button
-                  as="a"
-                  class="self-end"
-                  {href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Learn more
-                </Button>
-              )}
+              <div class="card-actions self-stretch">
+                {!href ? null : href.includes("http") ? (
+                  <a
+                    {href}
+                    target="_blank"
+                    class="btn btn-outline btn-primary btn-block"
+                    rel="noopener noreferrer"
+                  >
+                    Go To Resource{" "}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="size-5"
+                    >
+                      <path d="M15 3h6v6" />
+                      <path d="M10 14 21 3" />
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                    </svg>
+                  </a>
+                ) : (
+                  <button
+                    type="button"
+                    class="btn btn-primary btn-block"
+                    data-dialog="1"
+                  >
+                    Learn More
+                  </button>
+                )}
+              </div>
             </div>
           </article>
         </li>
@@ -60,3 +80,126 @@ const list = [
     }
   </ul>
 </section>
+
+<dialog class="modal modal-bottom !m-auto md:modal-middle">
+  <div class="modal-box relative md:max-w-screen-md">
+    <button
+      type="button"
+      id="close-dialog"
+      class="btn btn-circle btn-sm absolute end-2 top-2"
+    >
+      <span class="sr-only">Close modal</span>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        ><path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M6 18L18 6M6 6l12 12"></path></svg
+      >
+    </button>
+  </div>
+</dialog>
+
+<template data-dialog="1">
+  <article class="prose max-w-none">
+    <h1 class="text-lg">
+      Investment and Financing for addressing Water-related Disasters
+    </h1>
+    <p>
+      Globally, water-related disasters already account for 90% of all natural
+      disasters. Their frequency and intensity are rising due to rapid
+      development, population increase and climate change, causing enormous
+      damage to life and property worldwide. Water–related natural disasters
+      have emerged as a major obstacle hindering our common aspirations for
+      eradicating poverty, promoting inclusive economic growth, preserving the
+      environment, and ultimately, moving towards sustainability.
+    </p>
+    <p>
+      The Sendai Framework for Disaster Risk Reduction 2015-2030 adopted in the
+      Third UN World Conference on Disaster Risk Reduction highlighted
+      “investing in disaster risk reduction for resilience” as one of the four
+      priority actions, and called to promote public and private investment in
+      disaster risk prevention and reduction through structural and
+      non-structural measures in order to enhance the economic, social, health
+      and cultural resilience of persons, communities, countries and their
+      assets, as well as the environment. The framework also set targets to
+      substantially reduce global disaster mortality, number of affected people
+      and direct disaster economic loss by 2030.
+    </p>
+    <p>
+      Furthermore, the 2030 Agenda for Sustainable Development set out ambitious
+      goals and targets to address the issues of water and disasters, including
+      targets to substantially reduce the number of people suffering from water
+      scarcity, and the economic losses and the number of deaths and people
+      affected by water-related disasters.
+    </p>
+    <p>
+      Political commitments made in Sendai Framework and 2030 Agenda must be
+      matched by finance. Investment in water infrastructure and disaster risk
+      reduction, both structural and non-structural, not only prevents
+      frequently occurring disasters but also mitigates the catastrophic impacts
+      of mega-disasters. It can save lives, avoid the destruction of vital
+      infrastructure, and make a significant difference in achieving the
+      national and international goals of ending poverty and ensuring
+      sustainable and equitable growth for all.
+    </p>
+    <p>
+      In this context, HELP launched a flagship action on investment and
+      financing for water-related disasters in order to promote and strengthen
+      investment for preventing and mitigating water-related disasters around
+      the world.
+    </p>
+    <p>
+      Building on a cooperation between the <a
+        href="https://www.gwp.org/"
+        target="_blank"
+        rel="noopener noreferrer">Global Water Partnership (GWP)</a
+      >, the HELP and Ministry of Land, Infrastructure, Transport and Tourism of
+      Japan (MLIT), several sessions on DRR were organized in late 2018 and
+      early 2019 in several regions to consult on the draft principles on
+      investment and financing for water related-disaster risk reduction. These
+      Principles were launched at Fourth UN Special Session on Water and
+      Disasters in June 2019.
+    </p>
+  </article>
+</template>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const $dialog = document.querySelector("dialog");
+    const $items = document.querySelectorAll<HTMLButtonElement>(
+      "button[data-dialog]",
+    );
+
+    if ($dialog) {
+      $items.forEach((i) =>
+        i.addEventListener("click", () => {
+          const { dialog } = i.dataset;
+          const $template = document.querySelector<HTMLTemplateElement>(
+            `template[data-dialog="${dialog}"]`,
+          )!;
+          const lastArticle = $dialog.querySelector("article");
+          lastArticle && lastArticle.remove();
+          $dialog.firstElementChild?.appendChild(
+            $template?.content.cloneNode(true),
+          );
+          $dialog.showModal();
+        }),
+      );
+
+      $dialog
+        .querySelector<HTMLButtonElement>("#close-dialog")
+        ?.addEventListener("click", () => $dialog.close());
+
+      $dialog.addEventListener("click", ({ target }) => {
+        if ((target as HTMLDialogElement).nodeName === "DIALOG")
+          $dialog.close();
+      });
+    }
+  });
+</script>
