@@ -5,7 +5,7 @@ import meetings2 from "@/assets/images/brief/meetings-2.jpg";
 import meetings3 from "@/assets/images/brief/meetings-3.jpg";
 ---
 
-<section id="past-meetings" class="mx-auto max-w-screen-lg space-y-8 px-2">
+<section id="past-meetings" class="mx-auto max-w-screen-lg space-y-8 px-4">
   <h2 class="text-center text-4xl">Past Meetings</h2>
   <ul class="grid gap-x-4 gap-y-8 text-center md:grid-cols-3">
     {
@@ -28,50 +28,57 @@ import meetings3 from "@/assets/images/brief/meetings-3.jpg";
           ],
         ] as const
       ).map(([h3, src, alt], i) => (
-        <li class="overflow-hidden rounded-lg border border-gray-300 shadow">
-          <button
-            type="button"
-            data-meeting={i + 1}
-            class="group flex h-full flex-col"
-          >
-            <Image
-              {src}
-              {alt}
-              class="aspect-video w-full object-cover transition-transform group-hover:scale-105"
-            />
-            <h3
-              set:text={h3}
-              class="relative z-10 grid grow place-items-center  p-4"
-            />
-          </button>
+        <li>
+          <article class="group card relative h-full border ring-main transition focus-within:ring hover:ring">
+            <figure>
+              <Image
+                {src}
+                {alt}
+                class="aspect-video w-full object-cover transition-transform  group-hover:scale-105"
+              />
+            </figure>
+            <div class="card-body">
+              <h3 class="card-title">
+                <button
+                  type="button"
+                  data-dialog={i + 1}
+                  set:text={h3}
+                  class="outline-none after:absolute after:inset-0"
+                />
+              </h3>
+            </div>
+          </article>
         </li>
       ))
     }
   </ul>
 </section>
 
-<dialog
-  class="pointer-events-none fixed inset-0 !m-auto block rounded-lg p-8 opacity-0 transition backdrop:cursor-pointer open:pointer-events-auto open:opacity-100"
->
-  <button type="button" id="close-dialog" class="absolute right-4">
-    <span class="sr-only">Close dialog</span>
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      class="h-full w-full"
-      ><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg
-    ></button
-  >
+<dialog class="modal modal-bottom !m-auto md:modal-middle">
+  <div class="modal-box relative">
+    <button
+      type="button"
+      id="close-dialog"
+      class="btn btn-circle btn-sm absolute end-2 top-2"
+    >
+      <span class="sr-only">Close modal</span>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        ><path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M6 18L18 6M6 6l12 12"></path></svg
+      >
+    </button>
+  </div>
 </dialog>
 
-<template data-meeting="1">
+<template data-dialog="1">
   <article class="prose">
     <h1 class="text-lg">
       High-Level Expert Panel on Water and Disaster (HLEP/UNSGAB)
@@ -101,7 +108,7 @@ import meetings3 from "@/assets/images/brief/meetings-3.jpg";
     >
   </article>
 </template>
-<template data-meeting="2">
+<template data-dialog="2">
   <article class="prose">
     <h1 class="text-lg">
       Tokyo Meeting of the High-Level Expert Panel on Water and Disaster (28
@@ -130,7 +137,7 @@ import meetings3 from "@/assets/images/brief/meetings-3.jpg";
     >
   </article>
 </template>
-<template data-meeting="3">
+<template data-dialog="3">
   <article class="prose">
     <h1 class="text-lg">
       UN Special Thematic Session on Water and Disasters (6 March 2013)
@@ -161,19 +168,21 @@ import meetings3 from "@/assets/images/brief/meetings-3.jpg";
   document.addEventListener("astro:page-load", () => {
     const $dialog = document.querySelector("dialog");
     const $items = document.querySelectorAll<HTMLButtonElement>(
-      "button[data-meeting]",
+      "button[data-dialog]",
     );
 
     if ($dialog) {
       $items.forEach((i) =>
         i.addEventListener("click", () => {
-          const { meeting } = i.dataset;
+          const { dialog } = i.dataset;
           const $template = document.querySelector<HTMLTemplateElement>(
-            `template[data-meeting="${meeting}"]`,
+            `template[data-dialog="${dialog}"]`,
           )!;
           const lastArticle = $dialog.querySelector("article");
-          lastArticle && $dialog.removeChild(lastArticle);
-          $dialog.appendChild($template?.content.cloneNode(true));
+          lastArticle && lastArticle.remove();
+          $dialog.firstElementChild?.appendChild(
+            $template?.content.cloneNode(true),
+          );
           $dialog.showModal();
         }),
       );

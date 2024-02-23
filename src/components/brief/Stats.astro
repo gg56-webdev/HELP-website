@@ -1,14 +1,13 @@
 ---
-import Button from "@/components/Button.astro";
-import { getRelativeLocaleUrl } from "astro:i18n";
 import { SITE_LINKS } from "@/constants";
+import { getRelativeLocaleUrl } from "astro:i18n";
 import type { AvailableLocales } from "i18n";
 ---
 
 <!-- TODO: add water related bg -->
 <section id="stats" class="bg-main/15 py-32">
   <div
-    class="mx-auto grid max-w-screen-lg items-center gap-16 px-2 md:grid-cols-2"
+    class="mx-auto grid max-w-screen-lg items-center gap-16 px-4 md:grid-cols-2"
   >
     <dl class="grid items-start gap-y-12 max-md:grid-cols-3">
       {
@@ -44,13 +43,14 @@ import type { AvailableLocales } from "i18n";
         surrounding water and disasters, ensuring a concerted global effort to
         mitigate their impacts.
       </p>
-      <Button
-        as="a"
+      <a
+        class="btn btn-primary max-sm:btn-block"
         href={getRelativeLocaleUrl(
           Astro.currentLocale as AvailableLocales,
           SITE_LINKS.FLAGSHIP,
-        )}>Our Flagship Initiatives</Button
-      >
+        )}
+        >Our Flagship Initiatives
+      </a>
     </div>
   </div>
 </section>
