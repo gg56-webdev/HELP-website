@@ -23,10 +23,10 @@ export const ui = {
     "dropdown.about": "About HELP",
     "link.who-we-are": "Who we are",
     "link.background": "Background",
-    "link.network": "HELP Network",
-    "link.contact": "Contact Us",
+    "link.network": "HELP network",
+    "link.contact": "Contact us",
     "link.flagship-initiatives": "Flagship initiatives",
-    "link.disasters": "Water Disasters",
+    "link.disasters": "Water disasters",
   },
   fr: {
     "link.home": "Accueil",

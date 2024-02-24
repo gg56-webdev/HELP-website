@@ -63,7 +63,7 @@ const links = [
 
 {
   links.map(({ groupTitle, links }) => (
-    <nav>
+    <nav class="capitalize">
       <p class="footer-title" set:text={groupTitle} />
       {links.map(({ title, href }) => (
         <a {href} set:text={title} class="link-hover link" />
