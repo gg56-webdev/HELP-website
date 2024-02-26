@@ -3,6 +3,8 @@ import { SITE_LINKS } from "@/constants.ts";
 import type { Link, LinkBase } from "@/types";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { useTranslation, type AvailableLocales } from "i18n";
+import { Image } from "astro:assets";
+import logo from "@/assets/images/logo.png";
 
 const { HOME, BRIEF, DOCUMENTS, COVID_19, NEWS, ABOUT, FLAGSHIP } = SITE_LINKS;
 
@@ -46,7 +48,7 @@ const links: Array<Link | (LinkBase & { links: Link[] })> = [
 ];
 ---
 
-<div class="grid">
+<aside class="flex min-h-full w-80 flex-col bg-base-100 p-4">
   <label for="drawer" class="btn btn-square btn-ghost ms-auto">
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -98,4 +100,9 @@ const links: Array<Link | (LinkBase & { links: Link[] })> = [
       }
     </ul>
   </nav>
-</div>
+  <Image
+    src={logo}
+    alt="HELP logo."
+    class="mx-auto mt-auto w-12 object-contain"
+  />
+</aside>
