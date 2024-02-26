@@ -11,7 +11,7 @@ const {
   currentLocale,
   url: { pathname },
 } = Astro;
-// TODO: need to be careful if locale code is longer then 2
+// need to be careful if locale code is longer then 2
 const path = currentLocale === defaultLocale ? pathname : pathname.slice(4);
 ---
 

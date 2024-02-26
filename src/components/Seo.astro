@@ -12,6 +12,10 @@ export type Props = {
 
 const { url, currentLocale } = Astro;
 
+const matchRes = url.pathname.match(/(\/[a-zA-Z]{2})?(\/.*)/);
+// const langCode = matchRes?.[1] || "";
+const path = matchRes?.[2];
+
 const {
   title,
   ogTitle,
@@ -35,12 +39,13 @@ const titleTemplate = title
 {
   languages.map(({ lang }) => {
     if (currentLocale === lang) return null;
-    // TODO: figure out how to add alternate to specific page
     return (
       <link
         rel="alternate"
         hreflang={lang}
-        href={new URL(lang === defaultLocale ? "/" : lang, url.origin)}
+        href={
+          new URL(`${lang === defaultLocale ? "" : lang}${path}`, url.origin)
+        }
       />
     );
   })

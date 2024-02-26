@@ -4,6 +4,7 @@ import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
+  // TODO: change to prod url
   site: "https://help-website-git-dev-gg56-webdev.vercel.app",
   integrations: [tailwind({ applyBaseStyles: false })],
   i18n: {
