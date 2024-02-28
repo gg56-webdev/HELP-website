@@ -61,13 +61,21 @@ const links = [
 ];
 ---
 
-{
-  links.map(({ groupTitle, links }) => (
-    <nav class="capitalize">
-      <p class="footer-title" set:text={groupTitle} />
-      {links.map(({ title, href }) => (
-        <a {href} set:text={title} class="link-hover link" />
-      ))}
-    </nav>
-  ))
-}
+<nav class="contents capitalize">
+  <ul class="contents">
+    {
+      links.map(({ groupTitle, links }) => (
+        <li>
+          <h2 class="footer-title text-base" set:text={groupTitle} />
+          <ul class="">
+            {links.map(({ title, href }) => (
+              <li>
+                <a {href} set:text={title} class="link-hover link block py-2" />
+              </li>
+            ))}
+          </ul>
+        </li>
+      ))
+    }
+  </ul>
+</nav>

@@ -80,10 +80,7 @@ const links: Array<Link | (LinkBase & { links: Link[] })> = [
                   <path d="m6 9 6 6 6-6" />
                 </svg>
               </div>
-              <ul
-                tabindex="0"
-                class="menu dropdown-content menu-lg z-[1] w-52 rounded-box bg-base-100 p-2 capitalize text-neutral shadow"
-              >
+              <ul class="menu dropdown-content menu-lg z-[1] w-52 rounded-box bg-base-100 p-2 capitalize text-neutral shadow">
                 {item.links.map(({ href, title }) => (
                   <li>
                     <a

@@ -49,7 +49,11 @@ const links: Array<Link | (LinkBase & { links: Link[] })> = [
 ---
 
 <aside class="flex min-h-full w-80 flex-col bg-base-100 p-4">
-  <label for="drawer" class="btn btn-square btn-ghost ms-auto">
+  <label
+    for="drawer"
+    aria-label="close sidebar"
+    class="btn btn-square btn-ghost ms-auto"
+  >
     <svg
       xmlns="http://www.w3.org/2000/svg"
       class="h-6 w-6"
