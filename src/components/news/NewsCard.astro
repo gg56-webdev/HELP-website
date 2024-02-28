@@ -1,0 +1,40 @@
+---
+import { Image } from "astro:assets";
+import testImg from "@/assets/images/brief/meetings-1.jpg";
+
+type Props = {
+  title: string;
+  slug: string;
+  date?: Date;
+  category?: "meeting" | "news" | "initiative";
+};
+
+const { title, category = "news", date = new Date() } = Astro.props;
+---
+
+<article class="card border">
+  <figure class="relative">
+    <Image src={testImg} alt="" class="aspect-video w-full object-cover" />
+    {
+      category && (
+        <span
+          set:text={category}
+          class="badge badge-neutral absolute right-2 top-2 capitalize"
+        />
+      )
+    }
+  </figure>
+  <div class="card-body">
+    <time datetime={date.toLocaleDateString()} class="text-sm"
+      >{
+        date.toLocaleDateString(Astro.currentLocale, { dateStyle: "medium" })
+      }</time
+    >
+    <h3 set:text={title} class="mb-2 line-clamp-3" />
+    <div class="card-actions mt-auto">
+      <a href="/" class="btn btn-outline btn-primary btn-sm max-md:btn-block">
+        Read Article →
+      </a>
+    </div>
+  </div>
+</article>
