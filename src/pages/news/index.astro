@@ -78,8 +78,10 @@ const categories = [...new Set(news.map(({ category }) => category))];
       const { category } = btn.dataset;
 
       if (!category) return;
+      // @ts-ignore
       document.startViewTransition
-        ? document.startViewTransition(() => filter(category))
+        ? // @ts-ignore
+          document.startViewTransition(() => filter(category))
         : filter(category);
 
       $categoryBtns.forEach((btn) => btn.classList.remove("btn-active"));
