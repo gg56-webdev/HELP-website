@@ -38,17 +38,17 @@ const links: Array<Link | (LinkBase & { links: Link[] })> = [
     ],
   },
   {
-    title: t("link.flagship-initiatives"),
-    href: getRelativeLocaleUrl(currentLocale, FLAGSHIP),
-  },
-  {
     title: t("link.newsroom"),
     href: getRelativeLocaleUrl(currentLocale, NEWS),
+  },
+  {
+    title: t("link.flagship-initiatives"),
+    href: getRelativeLocaleUrl(currentLocale, FLAGSHIP),
   },
 ];
 ---
 
-<aside class="flex min-h-full w-80 flex-col bg-base-100 p-4">
+<aside class="flex min-h-full w-[min(20rem,100%)] flex-col bg-base-100 p-4">
   <label
     for="drawer"
     aria-label="close sidebar"
