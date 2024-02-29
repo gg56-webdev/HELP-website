@@ -19,7 +19,7 @@ const { title, category = "news", date = new Date() } = Astro.props;
       category && (
         <span
           set:text={category}
-          class="badge badge-neutral absolute right-2 top-2 capitalize"
+          class="badge badge-neutral absolute end-2 top-2 capitalize"
         />
       )
     }
