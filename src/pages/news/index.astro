@@ -83,36 +83,39 @@ const categories = [...new Set(news.map(({ category }) => category))];
 </BaseLayout>
 
 <script>
-  const $categoryBtns = document.querySelectorAll<HTMLButtonElement>(
-    "button[data-category]",
-  );
-  const $posts = document.querySelectorAll<HTMLLIElement>("li[data-category]");
-
-  $categoryBtns[0].classList.add("btn-active");
-
-  const filter = (category: string) => {
-    if (category === "all")
-      return $posts.forEach((post) => post.classList.remove("hidden"));
-    $posts.forEach((post) =>
-      category === post.dataset.category
-        ? post.classList.remove("hidden")
-        : post.classList.add("hidden"),
+  document.addEventListener("astro:page-load", () => {
+    const $categoryBtns = document.querySelectorAll<HTMLButtonElement>(
+      "button[data-category]",
     );
-  };
+    const $posts =
+      document.querySelectorAll<HTMLLIElement>("li[data-category]");
 
-  $categoryBtns.forEach((btn) =>
-    btn.addEventListener("click", ({ target }) => {
-      const { category } = btn.dataset;
+    $categoryBtns[0].classList.add("btn-active");
 
-      if (!category) return;
-      // @ts-ignore
-      document.startViewTransition
-        ? // @ts-ignore
-          document.startViewTransition(() => filter(category))
-        : filter(category);
+    const filter = (category: string) => {
+      if (category === "all")
+        return $posts.forEach((post) => post.classList.remove("hidden"));
+      $posts.forEach((post) =>
+        category === post.dataset.category
+          ? post.classList.remove("hidden")
+          : post.classList.add("hidden"),
+      );
+    };
 
-      $categoryBtns.forEach((btn) => btn.classList.remove("btn-active"));
-      (target as HTMLButtonElement).classList.add("btn-active");
-    }),
-  );
+    $categoryBtns.forEach((btn) =>
+      btn.addEventListener("click", ({ target }) => {
+        const { category } = btn.dataset;
+
+        if (!category) return;
+        // @ts-ignore
+        document.startViewTransition
+          ? // @ts-ignore
+            document.startViewTransition(() => filter(category))
+          : filter(category);
+
+        $categoryBtns.forEach((btn) => btn.classList.remove("btn-active"));
+        (target as HTMLButtonElement).classList.add("btn-active");
+      }),
+    );
+  });
 </script>
