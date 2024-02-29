@@ -4,12 +4,37 @@ import NewsCard from "@/components/news/NewsCard.astro";
 import type { ComponentProps } from "astro/types";
 
 const news: Array<ComponentProps<typeof NewsCard>> = [
-  { title: "title 1", slug: "title-1", category: "meeting" },
-  { title: "title 2", slug: "title-2", category: "news" },
-  { title: "title 3", slug: "title-3", category: "news" },
-  { title: "title 4", slug: "title-4", category: "initiative" },
-  { title: "title 5", slug: "title-5", category: "meeting" },
-  { title: "title 6", slug: "title-6", category: "meeting" },
+  {
+    title:
+      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti dolorem aliquam modi est exercitationem itaque labore facilis earum? Cum eum possimus fugiat ipsam pariatur doloribus maiores obcaecati ex fugit corrupti?",
+    slug: "title-1",
+    category: "meeting",
+  },
+  {
+    title:
+      "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate, quod.",
+    slug: "title-2",
+    category: "news",
+  },
+  { title: "Lorem ipsum dolor sit amet.", slug: "title-3", category: "news" },
+  {
+    title:
+      "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab animi quia beatae officia aperiam ut.",
+    slug: "title-4",
+    category: "initiative",
+  },
+  {
+    title:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus necessitatibus animi repellat ratione delectus nemo dolores nulla fugiat accusamus molestias.",
+    slug: "title-5",
+    category: "meeting",
+  },
+  {
+    title:
+      "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis, ipsam?",
+    slug: "title-6",
+    category: "meeting",
+  },
 ];
 
 const categories = [...new Set(news.map(({ category }) => category))];
@@ -17,7 +42,7 @@ const categories = [...new Set(news.map(({ category }) => category))];
 
 <BaseLayout title="">
   <main class="space-y-40 py-24 md:py-48">
-    <section class="mx-auto grid max-w-screen-lg px-4" id="news">
+    <section class="mx-auto grid max-w-screen-xl px-4" id="news">
       <div class="space-y-4 text-center">
         <h1 class="text-4xl">Newsroom</h1>
         <p class="md:text-lg">
@@ -25,23 +50,23 @@ const categories = [...new Set(news.map(({ category }) => category))];
           partners, meetings and initiatives.
         </p>
       </div>
-      <nav class="my-8">
-        <ul
-          class="flex flex-wrap justify-center gap-4 capitalize *:btn *:btn-outline *:btn-sm *:min-w-16 *:rounded-full"
-        >
-          <button data-category="all" class="btn-active capitalize">All</button>
-          {
-            categories.map((category) => (
+      <ul
+        aria-label="post filter"
+        class="my-8 flex flex-wrap justify-center gap-4"
+      >
+        {
+          ["all", ...categories].map((category) => (
+            <li class="*:btn *:btn-outline *:btn-sm *:min-w-16 *:rounded-full *:capitalize">
               <button
+                type="button"
                 data-category={category}
                 set:text={category}
-                class="capitalize"
               />
-            ))
-          }
-        </ul>
-      </nav>
-      <ul class="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+            </li>
+          ))
+        }
+      </ul>
+      <ul class="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {
           news.map((post) => (
             <li
@@ -62,6 +87,8 @@ const categories = [...new Set(news.map(({ category }) => category))];
     "button[data-category]",
   );
   const $posts = document.querySelectorAll<HTMLLIElement>("li[data-category]");
+
+  $categoryBtns[0].classList.add("btn-active");
 
   const filter = (category: string) => {
     if (category === "all")

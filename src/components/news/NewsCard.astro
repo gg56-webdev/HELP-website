@@ -12,7 +12,7 @@ type Props = {
 const { title, category = "news", date = new Date() } = Astro.props;
 ---
 
-<article class="card border">
+<article class="card h-full border">
   <figure class="relative">
     <Image src={testImg} alt="" class="aspect-video w-full object-cover" />
     {
@@ -30,9 +30,9 @@ const { title, category = "news", date = new Date() } = Astro.props;
         date.toLocaleDateString(Astro.currentLocale, { dateStyle: "medium" })
       }</time
     >
-    <h3 set:text={title} class="mb-2 line-clamp-3" />
+    <h2 set:text={title} class="mb-2 line-clamp-3 text-base" />
     <div class="card-actions mt-auto">
-      <a href="/" class="btn btn-outline btn-primary btn-sm max-md:btn-block">
+      <a href="/" class="btn btn-outline btn-primary btn-sm max-sm:btn-block">
         Read Article →
       </a>
     </div>
