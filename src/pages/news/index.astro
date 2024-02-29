@@ -90,7 +90,7 @@ const categories = [...new Set(news.map(({ category }) => category))];
     const $posts =
       document.querySelectorAll<HTMLLIElement>("li[data-category]");
 
-    $categoryBtns[0].classList.add("btn-active");
+    $categoryBtns[0] && $categoryBtns[0].classList.add("btn-active");
 
     const filter = (category: string) => {
       if (category === "all")
